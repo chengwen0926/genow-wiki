@@ -77,3 +77,42 @@
  GET / 200 in 138ms (next.js: 51ms, application-code: 87ms)
 [browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. (hooks/useShaderBackground.ts:120:21)
 [?25h
+
+> genow-wiki-frontend@0.1.0 dev
+> next dev -p 3002 -p 3002
+
+▲ Next.js 16.2.9 (Turbopack)
+- Local:         http://localhost:3002
+- Network:       http://192.168.1.19:3002
+- Environments: .env.local
+✓ Ready in 364ms
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/chengwen/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/chengwen/git/genow-wiki/frontend/package-lock.json
+
+
+ GET / 200 in 689ms (next.js: 503ms, application-code: 186ms)
+ GET / 200 in 29ms (next.js: 3ms, application-code: 26ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. (hooks/useShaderBackground.ts:120:21)
+ GET / 200 in 75ms (next.js: 22ms, application-code: 53ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. (hooks/useShaderBackground.ts:120:21)
+ GET / 200 in 29ms (next.js: 2ms, application-code: 27ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. (hooks/useShaderBackground.ts:120:21)
+ GET / 200 in 54ms (next.js: 6ms, application-code: 48ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. (hooks/useShaderBackground.ts:120:21)
+ GET / 200 in 26ms (next.js: 3ms, application-code: 23ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. (hooks/useShaderBackground.ts:120:21)
+ GET / 200 in 73ms (next.js: 7ms, application-code: 66ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. (hooks/useShaderBackground.ts:120:21)
+ GET / 200 in 53ms (next.js: 17ms, application-code: 36ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. (hooks/useShaderBackground.ts:120:21)
+ GET / 200 in 43ms (next.js: 9ms, application-code: 34ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. (hooks/useShaderBackground.ts:120:21)
+ GET / 200 in 55ms (next.js: 7ms, application-code: 49ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. (hooks/useShaderBackground.ts:120:21)
+ GET / 200 in 54ms (next.js: 18ms, application-code: 36ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. (hooks/useShaderBackground.ts:120:21)
+[?25h
