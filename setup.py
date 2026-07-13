@@ -191,12 +191,16 @@ def configure_frontend() -> tuple[str, int, int]:
     backend_host = prompt("后端 Host", default="0.0.0.0")
     backend_port = int(prompt("后端 Port", default=str(default_backend_port)))
     frontend_port = int(prompt("前端 Port", default=str(default_frontend_port)))
-    api_url = prompt("前端 API 地址", default=f"http://localhost:{backend_port}")
+    server_ip = prompt("服务器内网 IP 或域名（供浏览器访问，留空则用 localhost）", default="")
+    if server_ip:
+        api_url = prompt("前端 API 地址", default=f"http://{server_ip}:{backend_port}")
+    else:
+        api_url = prompt("前端 API 地址", default=f"http://localhost:{backend_port}")
 
     write_frontend_env(frontend_env_path, api_url)
     ok(f"frontend/.env.local 已写入")
 
-    return backend_host, backend_port, frontend_port
+    return backend_host, backend_port, frontend_port, server_ip
 
 
 def install_backend_dependencies() -> None:
@@ -215,7 +219,7 @@ def install_frontend_dependencies() -> None:
     ok("前端依赖安装完成")
 
 
-def start_services(backend_host: str, backend_port: int, frontend_port: int) -> None:
+def start_services(backend_host: str, backend_port: int, frontend_port: int, server_ip: str = "") -> None:
     step_header(5, "启动前后端服务")
 
     LOG_DIR.mkdir(parents=True, exist_ok=True)
@@ -234,18 +238,25 @@ def start_services(backend_host: str, backend_port: int, frontend_port: int) -> 
             **os.environ,
             "HOST": backend_host,
             "PORT": str(backend_port),
-            "RELOAD": "true",
-            "CORS_ORIGINS": f"http://localhost:{frontend_port},http://127.0.0.1:{frontend_port}",
+            "RELOAD": "false",
+            "CORS_ORIGINS": (
+                f"http://localhost:{frontend_port},http://127.0.0.1:{frontend_port}"
+                + (f",http://{server_ip}:{frontend_port}" if server_ip else "")
+            ),
             "PYTHONIOENCODING": "utf-8",
         },
     )
     _bg_procs.append(backend_proc)
 
+    info("构建前端...")
+    run(["npm", "run", "build"], cwd=FRONTEND_DIR)
+    ok("前端构建完成")
+
     frontend_log_path = LOG_DIR / "frontend.log"
     info(f"启动前端  {DIM}(日志 → {frontend_log_path.relative_to(ROOT)}){RESET}")
     frontend_log = open(frontend_log_path, "a", encoding="utf-8")
     frontend_proc = subprocess.Popen(
-        ["npm", "run", "dev", "--", "-p", str(frontend_port)],
+        ["npm", "run", "start", "--", "-p", str(frontend_port)],
         cwd=FRONTEND_DIR,
         stdout=frontend_log,
         stderr=frontend_log,
@@ -292,9 +303,9 @@ def main() -> None:
         sys.exit(0)
 
     check_prerequisites()
-    backend_host, backend_port, frontend_port = configure_frontend()
+    backend_host, backend_port, frontend_port, server_ip = configure_frontend()
     install_backend_dependencies()
     install_frontend_dependencies()
-    start_services(backend_host, backend_port, frontend_port)
+    start_services(backend_host, backend_port, frontend_port, server_ip)
 if __name__ == "__main__":
     main()
