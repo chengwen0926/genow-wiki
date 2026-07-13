@@ -19,20 +19,32 @@ import urllib.request
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parent
-BACKEND_DIR = ROOT / "backend"
+# ─────────────────────────────────────────────────────────────────────────────
+# 路径常量
+# ─────────────────────────────────────────────────────────────────────────────
+
+ROOT         = Path(__file__).resolve().parent
+BACKEND_DIR  = ROOT / "backend"
 FRONTEND_DIR = ROOT / "frontend"
-LOG_DIR = ROOT / "log"
+LOG_DIR      = ROOT / "log"
 
-TOTAL_STEPS = 6
+TOTAL_STEPS = 7
 
-RESET = "\033[0m"
-BOLD = "\033[1m"
-DIM = "\033[2m"
-GREEN = "\033[32m"
+# ─────────────────────────────────────────────────────────────────────────────
+# ANSI 颜色
+# ─────────────────────────────────────────────────────────────────────────────
+
+RESET  = "\033[0m"
+BOLD   = "\033[1m"
+DIM    = "\033[2m"
+GREEN  = "\033[32m"
 YELLOW = "\033[33m"
-RED = "\033[31m"
-CYAN = "\033[36m"
+RED    = "\033[31m"
+CYAN   = "\033[36m"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 后台进程注册表（用于 Ctrl+C 清理）
+# ─────────────────────────────────────────────────────────────────────────────
 
 _bg_procs: list[subprocess.Popen] = []
 
@@ -51,17 +63,13 @@ def _cleanup(sig=None, frame=None) -> None:
 signal.signal(signal.SIGINT, _cleanup)
 signal.signal(signal.SIGTERM, _cleanup)
 
+# ─────────────────────────────────────────────────────────────────────────────
+# UI 工具函数
+# ─────────────────────────────────────────────────────────────────────────────
 
-def ok(msg: str) -> None:
-    print(f"  {GREEN}✓{RESET}  {msg}")
-
-
-def info(msg: str) -> None:
-    print(f"  {CYAN}→{RESET}  {msg}")
-
-
-def warn(msg: str) -> None:
-    print(f"  {YELLOW}!{RESET}  {msg}")
+def ok(msg: str)   -> None: print(f"  {GREEN}✓{RESET}  {msg}")
+def info(msg: str) -> None: print(f"  {CYAN}→{RESET}  {msg}")
+def warn(msg: str) -> None: print(f"  {YELLOW}!{RESET}  {msg}")
 
 
 def fail(msg: str) -> None:
@@ -98,6 +106,9 @@ def confirm(question: str, default: bool = True) -> bool:
         return default
     return default if not value else value in {"y", "yes"}
 
+# ─────────────────────────────────────────────────────────────────────────────
+# 系统工具函数
+# ─────────────────────────────────────────────────────────────────────────────
 
 def cmd_available(name: str) -> bool:
     return shutil.which(name) is not None
@@ -144,27 +155,56 @@ def wait_for(url: str, label: str, timeout: int = 90) -> bool:
     warn(f"{label} 未在 {timeout}s 内响应，请查看日志")
     return False
 
+# ─────────────────────────────────────────────────────────────────────────────
+# .env 文件读写
+# ─────────────────────────────────────────────────────────────────────────────
+
+def read_env(path: Path) -> dict[str, str]:
+    """将 .env 文件解析为 dict（忽略注释和空行）。"""
+    result: dict[str, str] = {}
+    if not path.exists():
+        return result
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        k, _, v = line.partition("=")
+        result[k.strip()] = v.strip()
+    return result
+
+
+def write_backend_env(path: Path, cfg: dict[str, str]) -> None:
+    content = "\n".join([
+        "# 后端配置（由 setup.py 生成）",
+        f"HOST={cfg.get('HOST', '0.0.0.0')}",
+        f"PORT={cfg.get('PORT', '8002')}",
+        f"RELOAD={cfg.get('RELOAD', 'false')}",
+        f"CORS_ORIGINS={cfg.get('CORS_ORIGINS', '')}",
+    ])
+    path.write_text(content + "\n", encoding="utf-8")
+
 
 def write_frontend_env(path: Path, api_url: str) -> None:
     path.write_text(
-        "\n".join(
-            [
-                "# 前端配置（由 setup.py 生成）",
-                f"NEXT_PUBLIC_API_URL={api_url}",
-                "",
-            ]
-        ),
+        "\n".join([
+            "# 前端配置（由 setup.py 生成）",
+            f"NEXT_PUBLIC_API_URL={api_url}",
+            "",
+        ]),
         encoding="utf-8",
     )
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STEP 1 — 检查前置依赖
+# ─────────────────────────────────────────────────────────────────────────────
 
 def check_prerequisites() -> None:
     step_header(1, "检查前置依赖")
 
     checks = [
-        ("uv", "uv"),
+        ("uv",   "uv"),
         ("node", "Node.js"),
-        ("npm", "npm"),
+        ("npm",  "npm"),
     ]
 
     missing: list[str] = []
@@ -180,55 +220,95 @@ def check_prerequisites() -> None:
     if missing:
         fail(f"缺少前置依赖：{', '.join(missing)}")
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STEP 2 — 配置后端环境变量
+# ─────────────────────────────────────────────────────────────────────────────
 
-def configure_frontend() -> tuple[str, int, int]:
-    step_header(2, "配置启动参数")
+def configure_backend() -> dict[str, str]:
+    step_header(2, "配置后端环境变量")
 
-    frontend_env_path = FRONTEND_DIR / ".env.local"
-    default_backend_port = 8002
-    default_frontend_port = 3002
+    backend_env_path = BACKEND_DIR / ".env"
+    existing = read_env(backend_env_path)
 
-    backend_host = prompt("后端 Host", default="0.0.0.0")
-    backend_port = int(prompt("后端 Port", default=str(default_backend_port)))
-    frontend_port = int(prompt("前端 Port", default=str(default_frontend_port)))
-    server_ip = prompt("服务器内网 IP 或域名（供浏览器访问，留空则用 localhost）", default="")
-    if server_ip:
-        api_url = prompt("前端 API 地址", default=f"http://{server_ip}:{backend_port}")
-    else:
-        api_url = prompt("前端 API 地址", default=f"http://localhost:{backend_port}")
+    if backend_env_path.exists():
+        warn("检测到已有 backend/.env")
+        if not confirm("是否重新配置？（选 N 保留现有配置）", default=False):
+            ok("保留现有 backend/.env，跳过此步骤")
+            return existing
 
-    write_frontend_env(frontend_env_path, api_url)
-    ok(f"frontend/.env.local 已写入")
+    cfg: dict[str, str] = {}
+    cfg["HOST"] = prompt("后端监听地址", default=existing.get("HOST", "0.0.0.0"))
+    cfg["PORT"] = prompt("后端端口",     default=existing.get("PORT", "8002"))
+    cfg["RELOAD"] = "false"
+    cfg["CORS_ORIGINS"] = prompt(
+        "CORS 允许的来源（前端地址，JSON 数组格式）",
+        default=existing.get(
+            "CORS_ORIGINS",
+            '["http://localhost:3002","http://127.0.0.1:3002"]',
+        ),
+    )
 
-    return backend_host, backend_port, frontend_port, server_ip
+    write_backend_env(backend_env_path, cfg)
+    ok("backend/.env 已写入")
+    return cfg
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STEP 3 — 配置前端环境变量
+# ─────────────────────────────────────────────────────────────────────────────
+
+def configure_frontend() -> None:
+    step_header(3, "配置前端环境变量")
+
+    env_local = FRONTEND_DIR / ".env.local"
+    existing  = read_env(env_local)
+
+    api_url = prompt(
+        "后端 API 地址（浏览器可访问的地址，内网部署请填服务器 IP）",
+        default=existing.get("NEXT_PUBLIC_API_URL", "http://localhost:8002"),
+    )
+
+    write_frontend_env(env_local, api_url)
+    ok("frontend/.env.local 已写入")
+
+# ─────────────────────────────────────────────────────────────────────────────
+# STEP 4 — 安装后端依赖
+# ─────────────────────────────────────────────────────────────────────────────
 
 def install_backend_dependencies() -> None:
-    step_header(3, "安装后端依赖")
+    step_header(4, "安装后端依赖")
 
     info("uv sync...")
     run(["uv", "sync"], cwd=BACKEND_DIR)
     ok("后端依赖同步完成")
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STEP 5 — 安装前端依赖
+# ─────────────────────────────────────────────────────────────────────────────
 
 def install_frontend_dependencies() -> None:
-    step_header(4, "安装前端依赖")
+    step_header(5, "安装前端依赖")
 
     info("npm install...")
     run(["npm", "install"], cwd=FRONTEND_DIR)
     ok("前端依赖安装完成")
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STEP 6 — 构建前端
+# ─────────────────────────────────────────────────────────────────────────────
 
 def build_frontend() -> None:
-    step_header(5, "构建前端（生产）")
+    step_header(6, "构建前端（生产）")
 
-    info("npm run build...")
+    info("npm run build（此步骤需要 1-2 分钟，请耐心等待）...")
     run(["npm", "run", "build"], cwd=FRONTEND_DIR)
     ok("前端构建完成")
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STEP 7 — 启动前后端服务
+# ─────────────────────────────────────────────────────────────────────────────
 
-def start_services(backend_host: str, backend_port: int, frontend_port: int, server_ip: str = "") -> None:
-    step_header(6, "启动前后端服务")
+def start_services(backend_port: int = 8002, frontend_port: int = 3002) -> None:
+    step_header(7, "启动前后端服务")
 
     LOG_DIR.mkdir(parents=True, exist_ok=True)
     shell = sys.platform == "win32"
@@ -242,17 +322,7 @@ def start_services(backend_host: str, backend_port: int, frontend_port: int, ser
         stdout=backend_log,
         stderr=backend_log,
         shell=shell,
-        env={
-            **os.environ,
-            "HOST": backend_host,
-            "PORT": str(backend_port),
-            "RELOAD": "false",
-            "CORS_ORIGINS": (
-                f"http://localhost:{frontend_port},http://127.0.0.1:{frontend_port}"
-                + (f",http://{server_ip}:{frontend_port}" if server_ip else "")
-            ),
-            "PYTHONIOENCODING": "utf-8",
-        },
+        env={**os.environ, "PYTHONIOENCODING": "utf-8"},
     )
     _bg_procs.append(backend_proc)
 
@@ -268,16 +338,16 @@ def start_services(backend_host: str, backend_port: int, frontend_port: int, ser
     )
     _bg_procs.append(frontend_proc)
 
-    backend_ok = wait_for(f"http://localhost:{backend_port}/api/health", "后端", timeout=60)
-    frontend_ok = wait_for(f"http://localhost:{frontend_port}", "前端", timeout=90)
+    backend_ok  = wait_for(f"http://localhost:{backend_port}/api/health", "后端", timeout=60)
+    frontend_ok = wait_for(f"http://localhost:{frontend_port}",            "前端", timeout=90)
 
     print(f"\n  {DIM}{'─' * 44}{RESET}")
     print(f"\n  {BOLD}{GREEN}启动完成！{RESET}\n")
 
     entries = [
-        ("前端应用", f"http://localhost:{frontend_port}", frontend_ok),
-        ("后端 API", f"http://localhost:{backend_port}", backend_ok),
-        ("健康检查", f"http://localhost:{backend_port}/api/health", backend_ok),
+        ("前端应用", f"http://localhost:{frontend_port}",            frontend_ok),
+        ("后端 API", f"http://localhost:{backend_port}",             backend_ok),
+        ("健康检查", f"http://localhost:{backend_port}/api/health",  backend_ok),
     ]
     for label, url, ready in entries:
         status = f"{GREEN}✓{RESET}" if ready else f"{YELLOW}?{RESET}"
@@ -296,6 +366,9 @@ def start_services(backend_host: str, backend_port: int, frontend_port: int, ser
     except KeyboardInterrupt:
         _cleanup()
 
+# ─────────────────────────────────────────────────────────────────────────────
+# 主入口
+# ─────────────────────────────────────────────────────────────────────────────
 
 def main() -> None:
     header()
@@ -306,11 +379,17 @@ def main() -> None:
         print("  已取消。\n")
         sys.exit(0)
 
-    check_prerequisites()
-    backend_host, backend_port, frontend_port, server_ip = configure_frontend()
-    install_backend_dependencies()
-    install_frontend_dependencies()
-    build_frontend()
-    start_services(backend_host, backend_port, frontend_port, server_ip)
+    check_prerequisites()                        # Step 1
+    cfg = configure_backend()                    # Step 2
+    configure_frontend()                         # Step 3
+    install_backend_dependencies()               # Step 4
+    install_frontend_dependencies()              # Step 5
+    build_frontend()                             # Step 6
+    start_services(                              # Step 7
+        backend_port=int(cfg.get("PORT", "8002")),
+        frontend_port=3002,
+    )
+
+
 if __name__ == "__main__":
     main()
