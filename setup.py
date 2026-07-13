@@ -24,7 +24,7 @@ BACKEND_DIR = ROOT / "backend"
 FRONTEND_DIR = ROOT / "frontend"
 LOG_DIR = ROOT / "log"
 
-TOTAL_STEPS = 5
+TOTAL_STEPS = 6
 
 RESET = "\033[0m"
 BOLD = "\033[1m"
@@ -219,8 +219,16 @@ def install_frontend_dependencies() -> None:
     ok("前端依赖安装完成")
 
 
+def build_frontend() -> None:
+    step_header(5, "构建前端（生产）")
+
+    info("npm run build...")
+    run(["npm", "run", "build"], cwd=FRONTEND_DIR)
+    ok("前端构建完成")
+
+
 def start_services(backend_host: str, backend_port: int, frontend_port: int, server_ip: str = "") -> None:
-    step_header(5, "启动前后端服务")
+    step_header(6, "启动前后端服务")
 
     LOG_DIR.mkdir(parents=True, exist_ok=True)
     shell = sys.platform == "win32"
@@ -247,10 +255,6 @@ def start_services(backend_host: str, backend_port: int, frontend_port: int, ser
         },
     )
     _bg_procs.append(backend_proc)
-
-    info("构建前端...")
-    run(["npm", "run", "build"], cwd=FRONTEND_DIR)
-    ok("前端构建完成")
 
     frontend_log_path = LOG_DIR / "frontend.log"
     info(f"启动前端  {DIM}(日志 → {frontend_log_path.relative_to(ROOT)}){RESET}")
@@ -306,6 +310,7 @@ def main() -> None:
     backend_host, backend_port, frontend_port, server_ip = configure_frontend()
     install_backend_dependencies()
     install_frontend_dependencies()
+    build_frontend()
     start_services(backend_host, backend_port, frontend_port, server_ip)
 if __name__ == "__main__":
     main()
