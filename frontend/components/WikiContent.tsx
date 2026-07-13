@@ -1,6 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ComponentPropsWithoutRef,
+  type KeyboardEvent,
+  type ReactNode,
+} from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -13,7 +20,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8002";
 function slugify(value: string): string {
   return value
     .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
+    .replace(/[^\p{L}\p{N}_\s-]/gu, "")
     .trim()
     .replace(/[-\s]+/g, "-");
 }
@@ -58,6 +65,48 @@ type VideoCardProps = {
   src: string;
   label: string;
 };
+
+type ImageCardProps = ComponentPropsWithoutRef<"img">;
+
+function ImageCard({ src, alt, className, ...props }: ImageCardProps) {
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  async function toggleFullscreen() {
+    const image = imageRef.current;
+    if (!image) return;
+
+    if (document.fullscreenElement === image) {
+      await document.exitFullscreen();
+      return;
+    }
+
+    if (image.requestFullscreen) {
+      await image.requestFullscreen();
+    }
+  }
+
+  function handleKeyDown(event: KeyboardEvent<HTMLImageElement>) {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    void toggleFullscreen();
+  }
+
+  return (
+    <img
+      ref={imageRef}
+      src={src}
+      alt={alt ?? ""}
+      className={`wiki-image my-6 w-full rounded-[14px] bg-white/[0.02] object-cover shadow-[0_10px_28px_rgba(0,0,0,0.18)] ${className ?? ""}`}
+      loading="lazy"
+      role="button"
+      tabIndex={0}
+      aria-label={alt ? `放大查看图片：${alt}` : "放大查看图片"}
+      onClick={() => void toggleFullscreen()}
+      onKeyDown={handleKeyDown}
+      {...props}
+    />
+  );
+}
 
 function VideoCard({ src, label }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -205,10 +254,12 @@ export function WikiContent({ markdown }: WikiContentProps) {
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
-          h1: ({ children, ...props }) => (
-            <h1 id={slugify(flattenChildren(children))} className="mb-6 text-4xl tracking-tight" {...props}>
-              {children}
-            </h1>
+          h1: ({ children }) => (
+            <span
+              id={slugify(flattenChildren(children))}
+              className="block h-0"
+              aria-hidden="true"
+            />
           ),
           h2: ({ children, ...props }) => (
             <h2 id={slugify(flattenChildren(children))} className="mt-10 mb-4 text-2xl" {...props}>
@@ -225,12 +276,9 @@ export function WikiContent({ markdown }: WikiContentProps) {
               {children}
             </p>
           ),
-          img: ({ src, alt, ...props }) => (
-            <img
+          img: ({ src, ...props }) => (
+            <ImageCard
               src={typeof src === "string" ? resolveContentUrl(src) : src}
-              alt={alt ?? ""}
-              className="my-6 w-full rounded-[14px] bg-white/[0.02] object-cover shadow-[0_10px_28px_rgba(0,0,0,0.18)]"
-              loading="lazy"
               {...props}
             />
           ),

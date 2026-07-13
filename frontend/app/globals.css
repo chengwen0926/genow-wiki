@@ -202,13 +202,39 @@ body {
   cursor: zoom-in;
 }
 
+.wiki-image {
+  cursor: zoom-in;
+}
+
+.wiki-image:fullscreen {
+  width: 80vw;
+  height: 80vh;
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  border-radius: 0;
+  object-fit: contain;
+  background: #000;
+  cursor: zoom-out;
+}
+
+.wiki-image:fullscreen::backdrop {
+  background: rgba(3, 4, 7, 0.96);
+}
+
 .video-frame:fullscreen {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100vw;
-  height: 100vh;
-  padding: 24px;
+  width: 80vw;
+  height: 80vh;
+  margin: auto;
+  padding: 0;
+  background: #000;
+}
+
+.video-frame:fullscreen::backdrop {
   background: rgba(3, 4, 7, 0.96);
 }
 

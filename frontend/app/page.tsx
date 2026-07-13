@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { SidebarTree } from "@/components/SidebarTree";
 import { WikiContent } from "@/components/WikiContent";
-import { useShaderBackground } from "@/hooks/useShaderBackground";
 import {
   fetchWikiPage,
   fetchWikiTree,
@@ -17,9 +16,6 @@ function formatUpdatedTime(timestamp: number): string {
 }
 
 export default function HomePage() {
-  const backgroundRef = useRef<HTMLDivElement>(null);
-  useShaderBackground(backgroundRef);
-
   const [tree, setTree] = useState<WikiTreeNode[]>([]);
   const [page, setPage] = useState<WikiPageResponse | null>(null);
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
@@ -81,10 +77,17 @@ export default function HomePage() {
     }
   }
 
+  function handleHeadingClick(event: MouseEvent<HTMLAnchorElement>, headingId: string) {
+    event.preventDefault();
+    const target = document.getElementById(headingId);
+    if (!target) return;
+
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.history.replaceState(null, "", `#${headingId}`);
+  }
+
   return (
     <main className="relative flex h-screen w-screen items-center justify-center overflow-hidden bg-[#030407] p-4 md:p-6">
-      <div ref={backgroundRef} className="pointer-events-none absolute inset-0 z-0" />
-
       <div
         className="pointer-events-none absolute inset-0 z-[1]"
         style={{
@@ -95,15 +98,10 @@ export default function HomePage() {
       />
 
       <div className="relative z-10 flex h-full w-full max-w-[1440px] flex-col">
-        <section className="mx-auto grid h-full w-full max-w-[1180px] flex-1 gap-5 lg:grid-cols-[360px_minmax(0,1fr)]">
+        <section className="mx-auto grid h-full w-full max-w-[1340px] flex-1 gap-5 lg:grid-cols-[360px_minmax(0,960px)]">
           <aside className="glass-login-panel animate-enter flex min-h-[260px] flex-col overflow-hidden rounded-[48px] [animation-delay:120ms]">
             <div className="panel-divider border-b px-8 py-8">
-              <div className="panel-badge inline-flex rounded-full px-4 py-1.5 text-[11px] uppercase">
-                Directory
-              </div>
-              <p className="mt-4 text-sm leading-6 text-slate-300/[0.82]">
-                Browse markdown pages served by the FastAPI backend.
-              </p>
+              <h1 className="text-3xl font-semibold text-white">GENOW WIKI</h1>
             </div>
             <div className="min-h-0 flex-1 overflow-y-auto px-5 py-6">
               {tree.length > 0 ? (
@@ -120,33 +118,30 @@ export default function HomePage() {
             <div className="panel-divider border-b px-8 py-8">
               <div className="flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
                 <div>
-                  <div className="panel-badge inline-flex rounded-full px-4 py-1.5 text-[11px] uppercase">
-                    Page
-                  </div>
-                  <h2 className="mt-4 text-3xl font-semibold text-white">
+                  <h2 className="text-3xl font-semibold text-white">
                     {page?.title ?? "Loading wiki..."}
                   </h2>
                 </div>
-                <div className="max-w-[420px]">
-                  <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Headings</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
+                <div className="flex max-w-[420px] flex-col items-end">
+                  <div className="flex flex-wrap justify-end gap-2">
                     {page?.headings?.slice(0, 8).map((heading: WikiHeading) => (
                       <a
                         key={heading.id}
                         href={`#${heading.id}`}
+                        onClick={(event) => handleHeadingClick(event, heading.id)}
                         className="panel-chip rounded-full px-3 py-1.5 text-xs transition hover:border-sky-300/30 hover:bg-sky-300/[0.08] hover:text-white"
                       >
                         {heading.text}
                       </a>
                     ))}
                   </div>
+                  {page && (
+                    <p className="mt-2 text-right text-[10px] text-slate-500">
+                      Last updated {formatUpdatedTime(page.updated_at)}
+                    </p>
+                  )}
                 </div>
               </div>
-              {page && (
-                <p className="mt-5 text-sm text-slate-400">
-                  Last updated {formatUpdatedTime(page.updated_at)}
-                </p>
-              )}
             </div>
 
             <div className="min-h-0 flex-1 overflow-y-auto px-8 py-7 md:py-8">
