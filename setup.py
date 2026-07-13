@@ -307,7 +307,7 @@ def build_frontend() -> None:
 # STEP 7 — 启动前后端服务
 # ─────────────────────────────────────────────────────────────────────────────
 
-def start_services(backend_port: int = 8002, frontend_port: int = 3002) -> None:
+def start_services(backend_port: int = 8002) -> None:
     step_header(7, "启动前后端服务")
 
     LOG_DIR.mkdir(parents=True, exist_ok=True)
@@ -315,6 +315,9 @@ def start_services(backend_port: int = 8002, frontend_port: int = 3002) -> None:
 
     backend_log_path = LOG_DIR / "backend.log"
     info(f"启动后端  {DIM}(日志 → {backend_log_path.relative_to(ROOT)}){RESET}")
+    # 去除可能指向旧路径的 VIRTUAL_ENV，避免 uv 子进程继承错误的 venv
+    clean_env = {k: v for k, v in os.environ.items() if k != "VIRTUAL_ENV"}
+
     backend_log = open(backend_log_path, "a", encoding="utf-8")
     backend_proc = subprocess.Popen(
         ["uv", "run", "python", "main.py"],
@@ -322,15 +325,16 @@ def start_services(backend_port: int = 8002, frontend_port: int = 3002) -> None:
         stdout=backend_log,
         stderr=backend_log,
         shell=shell,
-        env={**os.environ, "PYTHONIOENCODING": "utf-8"},
+        env={**clean_env, "PYTHONIOENCODING": "utf-8"},
     )
     _bg_procs.append(backend_proc)
 
     frontend_log_path = LOG_DIR / "frontend.log"
     info(f"启动前端  {DIM}(日志 → {frontend_log_path.relative_to(ROOT)}){RESET}")
     frontend_log = open(frontend_log_path, "a", encoding="utf-8")
+    # 端口已在 package.json start 脚本中固定，不再重复传入
     frontend_proc = subprocess.Popen(
-        ["npm", "run", "start", "--", "-p", str(frontend_port)],
+        ["npm", "run", "start"],
         cwd=FRONTEND_DIR,
         stdout=frontend_log,
         stderr=frontend_log,
@@ -339,13 +343,13 @@ def start_services(backend_port: int = 8002, frontend_port: int = 3002) -> None:
     _bg_procs.append(frontend_proc)
 
     backend_ok  = wait_for(f"http://localhost:{backend_port}/api/health", "后端", timeout=60)
-    frontend_ok = wait_for(f"http://localhost:{frontend_port}",            "前端", timeout=90)
+    frontend_ok = wait_for("http://localhost:3002",                        "前端", timeout=90)
 
     print(f"\n  {DIM}{'─' * 44}{RESET}")
     print(f"\n  {BOLD}{GREEN}启动完成！{RESET}\n")
 
     entries = [
-        ("前端应用", f"http://localhost:{frontend_port}",            frontend_ok),
+        ("前端应用", "http://localhost:3002",                         frontend_ok),
         ("后端 API", f"http://localhost:{backend_port}",             backend_ok),
         ("健康检查", f"http://localhost:{backend_port}/api/health",  backend_ok),
     ]
@@ -385,10 +389,7 @@ def main() -> None:
     install_backend_dependencies()               # Step 4
     install_frontend_dependencies()              # Step 5
     build_frontend()                             # Step 6
-    start_services(                              # Step 7
-        backend_port=int(cfg.get("PORT", "8002")),
-        frontend_port=3002,
-    )
+    start_services(backend_port=int(cfg.get("PORT", "8002")))  # Step 7
 
 
 if __name__ == "__main__":
