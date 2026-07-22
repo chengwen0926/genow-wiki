@@ -337,17 +337,22 @@ def build_frontend(mode: str) -> None:
 def kill_port(port: int) -> None:
     """杀掉占用指定端口的进程（跨平台）。"""
     if sys.platform == "win32":
-        result = subprocess.run(
+        subprocess.run(
             f"for /f \"tokens=5\" %a in ('netstat -ano ^| findstr :{port}') do taskkill /F /PID %a",
             shell=True, capture_output=True,
         )
-    else:
-        result = subprocess.run(
-            ["lsof", "-ti", f":{port}"], capture_output=True, text=True
-        )
-        pids = result.stdout.strip()
-        if pids:
-            subprocess.run(["kill", "-9"] + pids.split(), capture_output=True)
+        return
+
+    # Linux: 优先用 fuser
+    r = subprocess.run(["fuser", "-k", f"{port}/tcp"], capture_output=True)
+    if r.returncode == 0:
+        return
+
+    # macOS / Linux fallback: lsof
+    r = subprocess.run(["lsof", "-ti", f":{port}"], capture_output=True, text=True)
+    pids = r.stdout.strip()
+    if pids:
+        subprocess.run(["kill", "-9"] + pids.split(), capture_output=True)
 
 
 def start_services(mode: str, backend_port: int = 8002) -> None:
