@@ -334,8 +334,30 @@ def build_frontend(mode: str) -> None:
 # STEP 7 — 启动前后端服务
 # ─────────────────────────────────────────────────────────────────────────────
 
+def kill_port(port: int) -> None:
+    """杀掉占用指定端口的进程（跨平台）。"""
+    if sys.platform == "win32":
+        result = subprocess.run(
+            f"for /f \"tokens=5\" %a in ('netstat -ano ^| findstr :{port}') do taskkill /F /PID %a",
+            shell=True, capture_output=True,
+        )
+    else:
+        result = subprocess.run(
+            ["lsof", "-ti", f":{port}"], capture_output=True, text=True
+        )
+        pids = result.stdout.strip()
+        if pids:
+            subprocess.run(["kill", "-9"] + pids.split(), capture_output=True)
+
+
 def start_services(mode: str, backend_port: int = 8002) -> None:
     step_header(7, "启动前后端服务")
+
+    info("清理旧进程...")
+    kill_port(backend_port)
+    kill_port(3002)
+    time.sleep(1)
+    ok("端口已释放")
 
     LOG_DIR.mkdir(parents=True, exist_ok=True)
     shell = sys.platform == "win32"
