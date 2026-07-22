@@ -481,3 +481,68 @@ INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
 INFO:     Finished server process [95058]
+INFO:     Started server process [73461]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8002 (Press CTRL+C to quit)
+INFO:     127.0.0.1:56615 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56659 - "GET /api/wiki/tree HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56659 - "GET /api/wiki/page/console-mode HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56661 - "GET /media/console_mode/%E6%8E%A7%E5%88%B6%E5%8F%B0.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56670 - "GET /media/console_mode/Seedance%E6%99%BA%E8%83%BD%E5%8F%82%E8%80%83.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56665 - "GET /media/console_mode/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E6%AF%94%E4%BE%8B.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56671 - "GET /media/console_mode/%E7%94%A8%E9%87%8F%E7%BB%9F%E8%AE%A1.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:56664 - "GET /media/console_mode/%E7%B3%BB%E7%BB%9F%E9%A2%84%E8%AE%BE%E6%99%BA%E8%83%BD%E6%AF%94%E4%BE%8B.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56668 - "GET /media/console_mode/%E4%BF%AE%E6%94%B9%E5%A4%B4%E5%83%8F.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57061 - "GET /api/wiki/page/canvas-mode HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57064 - "GET /media/console_mode/%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95%E5%8D%A1%E7%89%87.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57065 - "GET /media/console_mode/%E6%94%BE%E5%A4%A7%E6%9F%A5%E7%9C%8B%E6%95%88%E6%9E%9C.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57067 - "GET /media/console_mode/Kling%E6%A8%A1%E5%BC%8F%E5%8F%82%E6%95%B0.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57067 - "GET /media/canvas_mode/%E8%8A%82%E7%82%B9%E5%8F%82%E8%80%83.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57064 - "GET /media/canvas_mode/%E5%88%87%E6%96%AD%E8%8A%82%E7%82%B9%E9%97%B4%E8%BF%9E%E7%BA%BF.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57069 - "GET /media/canvas_mode/%E5%88%9B%E5%BB%BA%E7%94%BB%E5%B8%83%E9%A1%B9%E7%9B%AE.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57071 - "GET /media/canvas_mode/%E5%88%9B%E5%BB%BA%E8%8A%82%E7%82%B9.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57073 - "GET /media/canvas_mode/%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9.mp4 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57073 - "GET /media/canvas_mode/%E5%86%85%E5%AE%B9%E7%94%9F%E6%88%90.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57077 - "GET /media/canvas_mode/%E5%B1%95%E5%BC%80%E7%94%9F%E6%88%90%E5%9B%BE%E5%83%8F.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57076 - "GET /media/canvas_mode/%E4%B8%8A%E4%BC%A0%E5%9B%BE%E5%83%8F.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57079 - "GET /media/canvas_mode/%E5%88%87%E6%96%AD%E8%8A%82%E7%82%B9%E9%97%B4%E8%BF%9E%E7%BA%BF.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57083 - "GET /media/canvas_mode/%E5%88%9B%E5%BB%BA%E8%8A%82%E7%82%B9.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57081 - "GET /media/canvas_mode/%E5%88%9B%E5%BB%BA%E7%94%BB%E5%B8%83%E9%A1%B9%E7%9B%AE.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57079 - "GET /media/canvas_mode/%E5%86%85%E5%AE%B9%E7%94%9F%E6%88%90.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57079 - "GET /media/canvas_mode/%E5%B1%95%E5%BC%80%E7%94%9F%E6%88%90%E5%9B%BE%E5%83%8F.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57065 - "GET /media/canvas_mode/%E4%B8%8A%E4%BC%A0%E5%9B%BE%E5%83%8F.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57067 - "GET /media/canvas_mode/%E5%86%85%E5%AE%B9%E7%94%9F%E6%88%90.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57083 - "GET /media/canvas_mode/%E5%B1%95%E5%BC%80%E7%94%9F%E6%88%90%E5%9B%BE%E5%83%8F.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57079 - "GET /media/canvas_mode/%E5%88%9B%E5%BB%BA%E7%94%BB%E5%B8%83%E9%A1%B9%E7%9B%AE.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57081 - "GET /media/canvas_mode/%E5%88%87%E6%96%AD%E8%8A%82%E7%82%B9%E9%97%B4%E8%BF%9E%E7%BA%BF.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57065 - "GET /media/canvas_mode/%E5%88%9B%E5%BB%BA%E8%8A%82%E7%82%B9.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57065 - "GET /media/canvas_mode/%E4%B8%8A%E4%BC%A0%E5%9B%BE%E5%83%8F.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57124 - "GET /api/wiki/page/history HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57126 - "GET /media/history/%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57128 - "GET /media/history/%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57128 - "GET /media/history/%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57124 - "GET /api/wiki/page/sketch-mode HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57128 - "GET /media/sketch_mode/%E8%8D%89%E7%A8%BF%E6%A8%A1%E5%BC%8F1.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57137 - "GET /media/sketch_mode/%E8%8D%89%E7%A8%BF%E6%A8%A1%E5%BC%8F2.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57140 - "GET /media/sketch_mode/%E5%88%9D%E5%A7%8B%E5%8C%96%E8%8D%89%E7%A8%BF.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57139 - "GET /media/sketch_mode/%E8%8D%89%E7%A8%BF%E6%A8%A1%E5%BC%8F3.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57144 - "GET /media/sketch_mode/%E8%8D%89%E7%A8%BF%E6%A8%A1%E5%BC%8F2.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57142 - "GET /media/sketch_mode/%E8%8D%89%E7%A8%BF%E6%A8%A1%E5%BC%8F1.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57146 - "GET /media/sketch_mode/%E5%88%9D%E5%A7%8B%E5%8C%96%E8%8D%89%E7%A8%BF.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57148 - "GET /media/sketch_mode/%E8%8D%89%E7%A8%BF%E6%A8%A1%E5%BC%8F3.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57144 - "GET /media/sketch_mode/%E8%8D%89%E7%A8%BF%E6%A8%A1%E5%BC%8F2.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57148 - "GET /media/sketch_mode/%E8%8D%89%E7%A8%BF%E6%A8%A1%E5%BC%8F1.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57146 - "GET /media/sketch_mode/%E8%8D%89%E7%A8%BF%E6%A8%A1%E5%BC%8F3.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57142 - "GET /media/sketch_mode/%E5%88%9D%E5%A7%8B%E5%8C%96%E8%8D%89%E7%A8%BF.mp4 HTTP/1.1" 206 Partial Content
+INFO:     127.0.0.1:57187 - "GET /api/wiki/page/console-mode HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [73461]
+warning: `VIRTUAL_ENV=/opt/anaconda3` does not match the project environment path `.venv` and will be ignored; use `--active` to target the active environment instead
+INFO:     Started server process [6564]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8002 (Press CTRL+C to quit)
+INFO:     127.0.0.1:57042 - "GET /api/health HTTP/1.1" 200 OK
