@@ -4,6 +4,8 @@ frontend/.next
 frontend/node_modules
 backend/.venv
 backend/.env
+frontend/.env*.local
+log/
 __pycache__
 *.pyc
 log/

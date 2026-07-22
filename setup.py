@@ -160,7 +160,6 @@ def wait_for(url: str, label: str, timeout: int = 90) -> bool:
 # ─────────────────────────────────────────────────────────────────────────────
 
 def read_env(path: Path) -> dict[str, str]:
-    """将 .env 文件解析为 dict（忽略注释和空行）。"""
     result: dict[str, str] = {}
     if not path.exists():
         return result
@@ -184,15 +183,30 @@ def write_backend_env(path: Path, cfg: dict[str, str]) -> None:
     path.write_text(content + "\n", encoding="utf-8")
 
 
-def write_frontend_env(path: Path, api_url: str) -> None:
+def write_frontend_env(path: Path, api_url: str, label: str) -> None:
     path.write_text(
         "\n".join([
-            "# 前端配置（由 setup.py 生成）",
+            f"# {label}（由 setup.py 生成）",
             f"NEXT_PUBLIC_API_URL={api_url}",
             "",
         ]),
         encoding="utf-8",
     )
+
+# ─────────────────────────────────────────────────────────────────────────────
+# STEP 0 — 选择运行环境
+# ─────────────────────────────────────────────────────────────────────────────
+
+def select_mode() -> str:
+    print(f"\n{BOLD}{CYAN}  请选择运行环境{RESET}")
+    print(f"  {DIM}{'─' * 44}{RESET}")
+    print(f"  {BOLD}1{RESET}  本地开发  {DIM}(npm run dev，使用 localhost){RESET}")
+    print(f"  {BOLD}2{RESET}  内网部署  {DIM}(npm run build + start，使用服务器 IP){RESET}")
+    try:
+        choice = input(f"\n  {YELLOW}?{RESET}  请输入 1 或 2 {DIM}[1]{RESET}: ").strip()
+    except EOFError:
+        choice = ""
+    return "prod" if choice == "2" else "dev"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # STEP 1 — 检查前置依赖
@@ -224,7 +238,7 @@ def check_prerequisites() -> None:
 # STEP 2 — 配置后端环境变量
 # ─────────────────────────────────────────────────────────────────────────────
 
-def configure_backend() -> dict[str, str]:
+def configure_backend(mode: str) -> dict[str, str]:
     step_header(2, "配置后端环境变量")
 
     backend_env_path = BACKEND_DIR / ".env"
@@ -236,17 +250,19 @@ def configure_backend() -> dict[str, str]:
             ok("保留现有 backend/.env，跳过此步骤")
             return existing
 
+    is_prod = mode == "prod"
+    default_host = "0.0.0.0" if is_prod else existing.get("HOST", "127.0.0.1")
+    default_cors = existing.get(
+        "CORS_ORIGINS",
+        '["http://localhost:3002","http://127.0.0.1:3002"]' if not is_prod
+        else '["http://localhost:3002","http://127.0.0.1:3002","http://192.168.101.206:3002"]',
+    )
+
     cfg: dict[str, str] = {}
-    cfg["HOST"] = prompt("后端监听地址", default=existing.get("HOST", "0.0.0.0"))
+    cfg["HOST"] = prompt("后端监听地址", default=default_host)
     cfg["PORT"] = prompt("后端端口",     default=existing.get("PORT", "8002"))
     cfg["RELOAD"] = "false"
-    cfg["CORS_ORIGINS"] = prompt(
-        "CORS 允许的来源（前端地址，JSON 数组格式）",
-        default=existing.get(
-            "CORS_ORIGINS",
-            '["http://localhost:3002","http://127.0.0.1:3002"]',
-        ),
-    )
+    cfg["CORS_ORIGINS"] = prompt("CORS 允许的来源（JSON 数组格式）", default=default_cors)
 
     write_backend_env(backend_env_path, cfg)
     ok("backend/.env 已写入")
@@ -256,19 +272,28 @@ def configure_backend() -> dict[str, str]:
 # STEP 3 — 配置前端环境变量
 # ─────────────────────────────────────────────────────────────────────────────
 
-def configure_frontend() -> None:
+def configure_frontend(mode: str) -> None:
     step_header(3, "配置前端环境变量")
 
-    env_local = FRONTEND_DIR / ".env.local"
-    existing  = read_env(env_local)
+    is_prod = mode == "prod"
 
-    api_url = prompt(
-        "后端 API 地址（浏览器可访问的地址，内网部署请填服务器 IP）",
-        default=existing.get("NEXT_PUBLIC_API_URL", "http://localhost:8002"),
-    )
+    if is_prod:
+        env_path   = FRONTEND_DIR / ".env.production.local"
+        env_label  = "生产环境配置"
+        default_url_key = "NEXT_PUBLIC_API_URL"
+        existing   = read_env(env_path)
+        default_api = existing.get(default_url_key, "http://192.168.101.206:8002")
+        hint = "浏览器可访问的服务器内网 IP"
+    else:
+        env_path   = FRONTEND_DIR / ".env.development.local"
+        env_label  = "本地开发配置"
+        existing   = read_env(env_path)
+        default_api = existing.get("NEXT_PUBLIC_API_URL", "http://localhost:8002")
+        hint = "本地后端地址"
 
-    write_frontend_env(env_local, api_url)
-    ok("frontend/.env.local 已写入")
+    api_url = prompt(f"后端 API 地址（{hint}）", default=default_api)
+    write_frontend_env(env_path, api_url, env_label)
+    ok(f"{env_path.name} 已写入  {DIM}→ {api_url}{RESET}")
 
 # ─────────────────────────────────────────────────────────────────────────────
 # STEP 4 — 安装后端依赖
@@ -276,7 +301,6 @@ def configure_frontend() -> None:
 
 def install_backend_dependencies() -> None:
     step_header(4, "安装后端依赖")
-
     info("uv sync...")
     run(["uv", "sync"], cwd=BACKEND_DIR)
     ok("后端依赖同步完成")
@@ -287,18 +311,21 @@ def install_backend_dependencies() -> None:
 
 def install_frontend_dependencies() -> None:
     step_header(5, "安装前端依赖")
-
     info("npm install...")
     run(["npm", "install"], cwd=FRONTEND_DIR)
     ok("前端依赖安装完成")
 
 # ─────────────────────────────────────────────────────────────────────────────
-# STEP 6 — 构建前端
+# STEP 6 — 构建前端（仅生产模式）
 # ─────────────────────────────────────────────────────────────────────────────
 
-def build_frontend() -> None:
-    step_header(6, "构建前端（生产）")
+def build_frontend(mode: str) -> None:
+    if mode != "prod":
+        step_header(6, "构建前端（跳过，开发模式使用 npm run dev）")
+        ok("跳过")
+        return
 
+    step_header(6, "构建前端（生产）")
     info("npm run build（此步骤需要 1-2 分钟，请耐心等待）...")
     run(["npm", "run", "build"], cwd=FRONTEND_DIR)
     ok("前端构建完成")
@@ -307,17 +334,15 @@ def build_frontend() -> None:
 # STEP 7 — 启动前后端服务
 # ─────────────────────────────────────────────────────────────────────────────
 
-def start_services(backend_port: int = 8002) -> None:
+def start_services(mode: str, backend_port: int = 8002) -> None:
     step_header(7, "启动前后端服务")
 
     LOG_DIR.mkdir(parents=True, exist_ok=True)
     shell = sys.platform == "win32"
+    clean_env = {k: v for k, v in os.environ.items() if k != "VIRTUAL_ENV"}
 
     backend_log_path = LOG_DIR / "backend.log"
     info(f"启动后端  {DIM}(日志 → {backend_log_path.relative_to(ROOT)}){RESET}")
-    # 去除可能指向旧路径的 VIRTUAL_ENV，避免 uv 子进程继承错误的 venv
-    clean_env = {k: v for k, v in os.environ.items() if k != "VIRTUAL_ENV"}
-
     backend_log = open(backend_log_path, "a", encoding="utf-8")
     backend_proc = subprocess.Popen(
         ["uv", "run", "python", "main.py"],
@@ -330,11 +355,12 @@ def start_services(backend_port: int = 8002) -> None:
     _bg_procs.append(backend_proc)
 
     frontend_log_path = LOG_DIR / "frontend.log"
-    info(f"启动前端  {DIM}(日志 → {frontend_log_path.relative_to(ROOT)}){RESET}")
+    frontend_cmd = ["npm", "run", "start"] if mode == "prod" else ["npm", "run", "dev"]
+    mode_label   = "start（生产）" if mode == "prod" else "dev（开发，支持热更新）"
+    info(f"启动前端  {DIM}npm run {mode_label}  (日志 → {frontend_log_path.relative_to(ROOT)}){RESET}")
     frontend_log = open(frontend_log_path, "a", encoding="utf-8")
-    # 端口已在 package.json start 脚本中固定，不再重复传入
     frontend_proc = subprocess.Popen(
-        ["npm", "run", "start"],
+        frontend_cmd,
         cwd=FRONTEND_DIR,
         stdout=frontend_log,
         stderr=frontend_log,
@@ -379,17 +405,21 @@ def main() -> None:
     print(f"  {DIM}本脚本会为当前 Genow Wiki 项目安装依赖并启动前后端。{RESET}")
     print(f"  {DIM}所有输入都可以直接回车使用默认值。{RESET}\n")
 
+    mode = select_mode()
+    mode_label = f"{BOLD}{'内网部署（生产）' if mode == 'prod' else '本地开发'}{RESET}"
+    print(f"\n  已选择：{mode_label}\n")
+
     if not confirm("开始安装并启动？"):
         print("  已取消。\n")
         sys.exit(0)
 
     check_prerequisites()                        # Step 1
-    cfg = configure_backend()                    # Step 2
-    configure_frontend()                         # Step 3
+    cfg = configure_backend(mode)                # Step 2
+    configure_frontend(mode)                     # Step 3
     install_backend_dependencies()               # Step 4
     install_frontend_dependencies()              # Step 5
-    build_frontend()                             # Step 6
-    start_services(backend_port=int(cfg.get("PORT", "8002")))  # Step 7
+    build_frontend(mode)                         # Step 6
+    start_services(mode, backend_port=int(cfg.get("PORT", "8002")))  # Step 7
 
 
 if __name__ == "__main__":
