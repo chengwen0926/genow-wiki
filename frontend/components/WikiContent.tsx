@@ -193,7 +193,7 @@ function VideoCard({ src, label }: VideoCardProps) {
       {label && <div className="mb-2 text-sm text-slate-400/78">{label}</div>}
       <div
         ref={frameRef}
-        className="video-frame group overflow-hidden rounded-[16px] bg-white/[0.02] shadow-[0_14px_34px_rgba(0,0,0,0.22)]"
+        className="video-frame group overflow-hidden rounded-[16px] border border-white/10 bg-black/40 shadow-[0_14px_34px_rgba(0,0,0,0.22)]"
       >
         <div className="relative">
           <video
@@ -203,7 +203,7 @@ function VideoCard({ src, label }: VideoCardProps) {
             loop
             autoPlay
             preload="metadata"
-            className="video-element block w-full bg-black/50"
+            className="video-element block aspect-video w-full bg-black/60"
             onClick={toggleFullscreen}
           >
             <source src={src} type="video/mp4" />
