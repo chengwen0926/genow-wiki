@@ -9,3 +9,6 @@ log/
 __pycache__
 *.pyc
 log/
+frontend/out/
+frontend/public/media/
+*.tsbuildinfo

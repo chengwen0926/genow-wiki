@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3002",
-    "build": "next build",
-    "start": "next start -p 3002"
+    "dev": "node scripts/dev.mjs",
+    "build": "npm run sync-media && next build --webpack && npm run verify-export",
+    "sync-media": "node scripts/sync-media.mjs",
+    "preview": "node scripts/preview.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "typecheck": "tsc --noEmit",
+    "verify-export": "node scripts/verify-export.mjs"
   },
   "dependencies": {
     "next": "16.2.9",
@@ -13,14 +17,17 @@
     "react-dom": "19.2.4",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
-    "three": "^0.184.0"
+    "unified": "^11.0.5",
+    "remark-parse": "^11.0.0",
+    "mdast-util-to-string": "^4.0.0",
+    "unist-util-visit": "^5.1.0",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@types/three": "^0.184.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

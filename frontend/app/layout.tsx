@@ -4,8 +4,8 @@ import "./globals.css";
 
 
 export const metadata: Metadata = {
-  title: "Genow Wiki",
-  description: "A full-stack glassmorphism wiki app",
+  title: { default: "Genow Wiki", template: "%s | Genow Wiki" },
+  description: "Genow 使用文档与操作演示",
 };
 
 
@@ -15,8 +15,8 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="h-full overflow-hidden">{children}</body>
+    <html lang="zh-CN">
+      <body>{children}</body>
     </html>
   );
 }

@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {};
+const nextConfig: NextConfig = {
+  output: "export",
+  trailingSlash: true,
+  turbopack: { root: process.cwd() },
+  outputFileTracingRoot: process.cwd(),
+};
 
 export default nextConfig;
-
