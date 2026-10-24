@@ -1,1 +1,1 @@
-import './capture.css';export default function Layout({children}:{children:React.ReactNode}){return <html lang="zh-CN" className="dark"><body>{children}</body></html>}
+import './capture.css';import {ThemeProvider} from '@/components/layout/ThemeProvider';export default function Layout({children}:{children:React.ReactNode}){return <html lang="zh-CN" className="dark"><body><ThemeProvider>{children}</ThemeProvider></body></html>}

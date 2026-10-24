@@ -1,0 +1,87 @@
+{
+  "note": "Chrome full-viewport screenshots. Crop only; no retouching, compositing or UI reconstruction. Native clip API produced duplicated tiles, so crops are extracted from full screenshots.",
+  "crops": {
+    "settings-panels": {
+      "left": 520,
+      "top": 210,
+      "width": 1520,
+      "height": 500
+    },
+    "assets-filters": {
+      "left": 1072,
+      "top": 70,
+      "width": 416,
+      "height": 70
+    },
+    "assets-download": {
+      "left": 190,
+      "top": 70,
+      "width": 1380,
+      "height": 404
+    },
+    "frame-entry": {
+      "left": 590,
+      "top": 200,
+      "width": 1380,
+      "height": 880
+    },
+    "frame-actions": {
+      "left": 948,
+      "top": 400,
+      "width": 424,
+      "height": 470
+    },
+    "workflow-library": {
+      "left": 0,
+      "top": 64,
+      "width": 960,
+      "height": 800
+    },
+    "workflow-imported": {
+      "left": 480,
+      "top": 420,
+      "width": 1600,
+      "height": 880
+    },
+    "workflow-config": {
+      "left": 480,
+      "top": 420,
+      "width": 1600,
+      "height": 700
+    }
+  },
+  "sourceSizes": {
+    "settings-panels": [
+      2560,
+      1262
+    ],
+    "assets-filters": [
+      2560,
+      1262
+    ],
+    "assets-download": [
+      2560,
+      1262
+    ],
+    "frame-entry": [
+      2560,
+      1262
+    ],
+    "frame-actions": [
+      2560,
+      1262
+    ],
+    "workflow-library": [
+      2560,
+      1318
+    ],
+    "workflow-imported": [
+      2560,
+      1318
+    ],
+    "workflow-config": [
+      2560,
+      1318
+    ]
+  }
+}

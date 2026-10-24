@@ -1,0 +1,40 @@
+{
+  "capturedAt": "2026-10-24",
+  "sourceCommit": "988416aa52e6312d3964a90c08a1ae60c463d544",
+  "note": "Current working tree components in Chrome; isolated synthetic user, two assets and one workflow template. Real drag/drop UI with docs-only mock import response; no generation, publishing, sharing, download or upload submitted. Frames captured from a local still demo clip. Rectangular extraction only; see crop manifest. No verified browser zoom claim.",
+  "files": {
+    "frontend/src/components/layout/SettingsPanel.tsx": "1c942617256d0436f36d068c6c855a86f31379be9f48dfa366d42d58a05bc354",
+    "frontend/src/components/layout/settings/ConsolePanelSettings.tsx": "a0d394b2f0cd7f9142a420cb958a4014e8eb0c86296cc4c172ca19cc1224ad80",
+    "frontend/src/app/(main)/history/page.tsx": "fbcb4f76db7dc07532cec10525fe51f30c3978d8bfd645c1034a0bddaf79f9d9",
+    "frontend/src/components/canvas/editor/CanvasEditor.tsx": "5ea04371408483071432df0b059d8fc28e6d06d140d9cf89cf4b26d2d5bc8a1e",
+    "frontend/src/components/canvas/templates/WorkflowTemplateLibrary.tsx": "102d20f637bc4ceaf6802ea687ad8b4a39a4c5856e7e3fe7370460b89cafab74",
+    "frontend/src/components/canvas/templates/WorkflowTemplatePreview.tsx": "a290b9b9dfc3bb20fa93f1e349cb17cb48596abf545b6ebc5cd9ddfa01ed9526",
+    "frontend/src/components/shared/display/MediaLightbox.tsx": "0606e7ecf2b318ac1b22f63c16825f75bb516753d23a2f81179aacc9fc88587e",
+    "frontend/src/services/workflowTemplates.ts": "ebe5bf7f7dc8b47bdc08cd27d589c06577824ce4b0516b45d5168637667b8ce8"
+  },
+  "images": {
+    "settings-panels.jpg": "1f7efd1eae59b9fea5e0c6dd26a88e08ed20f1e2bd24eb118b95f4bb50e40986",
+    "assets-filters.jpg": "de0b1c9679c30d48e4bc6fe65da3778c78fd9be15ec832bef3e79efee49bb683",
+    "assets-download.jpg": "92ba07f63c80d17b6b7594bf496be7e568dd4ce6172bf31c6960d591e8a3f746",
+    "frame-entry.jpg": "ebe275fbf1fcdba213db2187ddc3f8233bf1062c68afda919dd14fa0f7ea9c8a",
+    "frame-actions.jpg": "a4acf62979d1d55bfb5cdebfc186e900290ade826da8f4b3fdf67b4d9d70c556",
+    "workflow-library.jpg": "79998be16ec43762e75d97f89eb57d78a3f6b66e02100e19c50c93511c2991f8",
+    "workflow-imported.jpg": "afe7f24c519796f81c2c692eac294a7f84b89e27d5e3c2dc7f401bf89d7138b8",
+    "workflow-config.jpg": "0f7d5a1f1c913839d1439320a44463845d0e995b536041f27bacf96afbb3041c"
+  },
+  "originalScreenshots": {
+    "settings-panels-full.jpg": "51c0115f917dfad822542d73b658aa3f9bf5b6c7d9887ac4e8b4cf33e33003c0",
+    "assets-filters-full.jpg": "aa5d87d622847d83486fa9fd2c0f71a4496fd333ca1d622f092b3956dec65394",
+    "assets-download-full.jpg": "f8b0213f2826f753514d4157846cf706ad59f48118e551d89b22bf28f4150b65",
+    "frame-entry-full.jpg": "282c5a526c529c858687df1fe169bf5e808c8a19f167710ca1cb2c32ea4ba3a1",
+    "frame-actions-full.jpg": "18445095bd43593a150a5f8932d60ce64298d744f5eea7c2892ee8b48f229b27",
+    "workflow-library-full.jpg": "f47353e32ec1661323a6adb27d3be2d9c23464e4bd119dd6e3cb4789d1caced7",
+    "workflow-imported-full.jpg": "f2f5d42d455cbbf1efc445d34ec2954d885b399b72834a9d2af9c6dbb26ea03e",
+    "workflow-config-full.jpg": "e26a5d37704e12738ca98420bab017f9dd5a529d17e64ddda05f2909d1f90e4a"
+  },
+  "video": {
+    "workflow-import.mp4": "62c2cfa2141667cd1f1f6b04d1318b07577c58ebaad6dc974f656154edc912a3",
+    "workflow-import-poster.jpg": "b29e8e4489e6479c960cda1a43fe556524591f75f9ef2ad36ae6dbc40dca87c0",
+    "workflow-import.zh-CN.vtt": "fef4cafd00e584dfe765853d3efb8c5b187dd862baa8d2a0b240e38f33f2f9be"
+  }
+}

@@ -10,20 +10,23 @@
 | 模型入口、图片参数、参考图引用 | 控制台图片生成 | 截图 + 15 秒引用短片 |
 | 首帧、视频模式、时长与镜头描述 | 控制台视频生成 | 截图 + 15 秒短片 |
 | 图片输出连接视频输入，检查下游首帧 | 项目空间与画布 | 截图 + 15 秒短片 |
-| 上下游节点结构 | 工作流模板 | 结构截图；不冒充模板导入过程 |
-| 个人素材引用菜单 | 生成资产与个人素材 | 仅一张示例素材的截图 |
+| 模板浏览、实际拖入与配置检查 | 工作流模板 | 3 张新截图 + 15 秒分步短片，另保留原节点结构示意 |
+| 个人素材引用菜单、组合筛选与批量下载选区 | 生成资产与个人素材 | 3 张截图 |
 | 焦段、结构化提示词、个人模板库与编辑 | 提示词与模板 | 4 张截图 |
 | 接收人搜索、已选标签和分享范围 | 消息通知与素材分享、权限与共享范围 | 2 张局部截图 |
 
-共 15 张文档截图、4 条 15 秒 MP4、4 张封面、4 份 WebVTT 字幕。截图支持放大；视频按需播放、离开视口暂停、支持全屏和下载；同页保留文字步骤。
+| 控制台三个功能开关 | 登录与个人设置 | 1 张截图 |
+| 视频截帧入口与两种保存去向 | 控制台视频生成 | 2 张截图 |
+
+共 23 张文档截图、5 条 15 秒 MP4、5 张封面、5 份 WebVTT 字幕。截图支持放大；视频按需播放、离开视口暂停、支持全屏和下载；同页保留文字步骤。
 
 ## 场景规范
 
 - 复用当前 genow-v2 的真实 React 组件；头部与空白区是文档演示容器，不是完整生产界面。
-- 控制台无生成历史；素材列表只保留一张咖啡杯示意图；画布只有两个相关节点。
+- 控制台无生成历史；引用菜单只保留一张咖啡杯示意图；资产演示页仅一张图片和一段相关静态短片；画布只有两个相关节点。
 - 新增模板和接收人来自虚构本地数据；截图停在编辑或发送前，不冒充保存或发送成功。弹窗背后的模糊效果由真实产品组件产生。
 - 咖啡杯由本项目 SVG 绘制，是示意素材，不代表生成效果。
-- 本地接口仅返回虚构数据。POST 返回 405；节点 PATCH 只回显配置，不连接业务后端。
+- 本地接口仅返回虚构数据。POST 仅允许 `docs-workflow` 项目的固定示例模板导入，并返回内存演示数据；其他 POST 返回 405。PATCH 只回显节点配置或返回虚构偏好，不连接业务后端。刷新工作流页恢复空画布。
 - 不读取实际账号，不清理或修改用户历史，不提交付费生成任务。
 - 视频由截图、步骤文字和高亮框组成，标注为“分步讲解”，不伪装为连续实录。
 - 模型列表仅反映制作时的组件；文档提醒读者以账号可用模型为准。
@@ -59,7 +62,45 @@ node docs/media-production/serve-capture.mjs ../genow-v2/frontend
 
 新增截图放在 `assets/tutorials/`，通过普通 Markdown 图片语法嵌入文章，沿用点击放大。正文明确解释演示场景、虚构账号和未提交状态。同步核对了当前焦段选项、模板保存/删除入口，以及分享弹窗没有留言和回执入口的边界；其他未拍摄章节不代表完成全面界面审计。
 
-## 修改与导出视频
+## 功能开关、资产、工作流与截帧补充批次
+
+本批通过 Chrome 操作真实 `SettingsPanel`、生成资产页面、`CanvasEditor` 和 `MediaLightbox`。采用浏览器当前视口拍摄完整 JPEG，再裁取功能区域；不改变组件样式，不重绘界面。本轮没有可靠确认 75% 缩放，因此不把截图标注为 75% 或 MacBook 原生录屏。原图宽 2560，高度随 Chrome 工具栏状态为 1262 或 1318；具体尺寸及裁取范围记录在 `capture/crops-2026-10-24-next.json`。Chrome 局部截图接口出现重复拼接，已改用完整截图裁取，并逐张检查。
+
+1. `/settings`：显示虚构账号及三个开启的开关，保存 `settings-panels-full.jpg`。
+2. `/assets?type=all&favorite=1`：显示控制台图片和视频、收藏筛选；保存 `assets-filters-full.jpg`。
+3. 点击下载图标，再选择两项素材，确认“下载 (2)”，保存 `assets-download-full.jpg`。停在下载前。
+4. `/workflow`：打开工作流模板，展开唯一模板简介，保存 `workflow-library-full.jpg`。将卡片拖至空白区域，保存 `workflow-imported-full.jpg`；点击上游图片节点，保存 `workflow-config-full.jpg`。导入接口只作用于此隔离页面，没有提交生成。
+5. `/frame`：本地四秒静态咖啡杯短片，保存 `frame-entry-full.jpg`；点击“截取当前帧”，核对时刻与两个按钮，保存 `frame-actions-full.jpg`。不点击加入素材库。四秒是示意文件时长，不代表模型支持四秒生成。
+
+将完整截图保存在同一个目录，再运行：
+
+```sh
+node docs/media-production/crop-screenshots.mjs /path/to/full-screenshots
+```
+
+裁取脚本使用项目已有 Sharp，只提取矩形区域，不合成、滤镜或重绘。生成八张正文截图，并把三张工作流镜头同步到独立视频工程。哈希和实际组件来源见 `provenance-2026-10-24-next.json`。示意短片由 `capture/cup.svg` 转为静帧后用 FFmpeg 编码成四秒 H.264，非 AI 生成。
+
+### 重导出工作流短片
+
+`workflow-video/` 是独立 15 秒工程，不修改原四条视频母版。先在本机提供有授权的中文字体；macOS 可在本地渲染时复制字体文件，字体本身已忽略 Git 提交：
+
+```sh
+mkdir -p docs/media-production/workflow-video/assets/fonts
+cp '/System/Library/Fonts/STHeiti Light.ttc' docs/media-production/workflow-video/assets/fonts/STHeiti-Light.ttc
+cd docs/media-production/workflow-video
+npx hyperframes@0.8.186 check --json
+npx hyperframes@0.8.186 snapshot --review
+npx hyperframes@0.8.186 preview --background
+npx hyperframes@0.8.186 render --quality delivery --output workflow-master.mp4
+cd ../../..
+python3 docs/media-production/export-tutorials.py --group workflow
+npm run verify-tutorials -- --probe
+npm run build
+```
+
+沿用现有静音分步短片风格；每步五秒，配中文文字和 WebVTT 字幕，明确不是连续录屏。`SPEC.md` 与 `REVIEW.md` 保存在该工程中。
+
+## 修改与导出首批视频
 
 `video/index.html` 为 60 秒制作母版，12 个场景分别在 `video/compositions/`。`stories.json` 记录镜头文字与高亮坐标；改文字时同时更新 HTML、字幕和正文步骤。`BRIEF.md`、`SPEC.md`、`REVIEW.md` 记录约束和检查结果。
 
@@ -77,7 +118,7 @@ npm run verify-tutorials -- --probe
 npm run build
 ```
 
-导出脚本按 manifest 顺序切分四条短片，生成 H.264 / yuv420p MP4，并启用 faststart。`--probe` 额外使用 FFprobe 校验视频尺寸、编码和时长。常规构建只校验资源存在、封面尺寸及字幕时间，不要求 FFmpeg。
+默认导出组 `base` 仅切分首批四条短片，`--group workflow` 只导出新增工作流短片；各组按 manifest 声明时长累计切分，生成 H.264 / yuv420p MP4，并启用 faststart。`--probe` 额外使用 FFprobe 校验视频尺寸、编码和时长。常规构建只校验资源存在、封面尺寸及字幕时间，不要求 FFmpeg。
 
 ## 验证记录
 

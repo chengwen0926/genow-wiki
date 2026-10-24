@@ -19,3 +19,10 @@ frontend/public/pagefind/
 docs/media-production/video/.hyperframes/
 docs/media-production/video/renders/
 docs/media-production/video/tutorials-master.mp4
+
+# Additional workflow tutorial production intermediates
+/docs/media-production/workflow-video/.hyperframes/
+/docs/media-production/workflow-video/renders/
+/docs/media-production/workflow-video/workflow-master.mp4
+/docs/media-production/workflow-video/assets/fonts/*.ttc
+/docs/media-production/workflow-video/.thumbnails/

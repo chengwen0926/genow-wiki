@@ -38,6 +38,15 @@
       "duration": 15,
       "width": 1920,
       "height": 1080
+    },
+    {
+      "file": "workflow-import.mp4",
+      "title": "工作流模板：浏览、拖入与检查",
+      "poster": "workflow-import-poster.jpg",
+      "captions": "workflow-import.zh-CN.vtt",
+      "duration": 15,
+      "width": 1920,
+      "height": 1080
     }
   ]
 }
