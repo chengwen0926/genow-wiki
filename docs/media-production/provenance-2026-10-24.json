@@ -1,0 +1,22 @@
+{
+  "capturedAt": "2026-10-24",
+  "sourceCommit": "988416aa52e6312d3964a90c08a1ae60c463d544",
+  "note": "Current working tree components; synthetic templates and recipient; screenshots only, no save/generation/share submission. Dialog background blur is native component styling.",
+  "files": {
+    "frontend/src/components/console/toolbar/PromptBuilderPanel.tsx": "dd40a5140db4e3de0d28db84d1d9e9d6d48b7aac24035e313d78ccfd7bed4fde",
+    "frontend/src/components/console/toolbar/PromptTemplateUploadOption.tsx": "a8cb231f50a20db869a3ab233edc82c0e3502093b34d22f7f8b7b47fad392cdf",
+    "frontend/src/lib/console/promptBuilder.ts": "28ba788122eacc90b562ff7c9cff68252f96c746f2bf31df711418176c86147b",
+    "frontend/src/components/shared/templates/PromptTemplateFiles.tsx": "ceda3cad51afa189f3f934efbaa5edb7af764610e83fd06f8b12cb418bedd105",
+    "frontend/src/components/shared/templates/PromptTemplateEditor.tsx": "90ffcdb125698ce7c4228229701817789ede843e4fe3f9c3fa878e06347315e8",
+    "frontend/src/components/shared/display/MaterialShareDialog.tsx": "aaba4a6d5dba7da1588fa4d04b431c9eafa0c4e2132c3faa862cf294695d3635",
+    "frontend/src/components/shared/display/RecipientPicker.tsx": "91aeae925a36069a524ea32b7ed88e2d6dc07287ca283266551f2e244dfb7aac"
+  },
+  "images": {
+    "prompt-template-edit.jpg": "b7664a79399b8b23083479af927a0c8fb7699c0faaaefbb2a1ce62e14b2b25d1",
+    "prompt-ready.jpg": "f3087bada52f24eb1e86d56195230e3071a8e0643a8f919150bb4a28bbf4d5d7",
+    "share-ready.jpg": "07d90ab05dfa5b664c5c4445ef23826e20463103e67ded9368974486968cd4ba",
+    "prompt-focal.jpg": "b613dc1df290ec65b760537ce00785cab385682e0ebb47620300f82e0e45bf2e",
+    "share-search.jpg": "4773bbd4ea927e5f838acf237a16e11dc5e896c7e6d388371a3e6805fb6a0328",
+    "prompt-templates.jpg": "186a944d1b8c8f1482c1a41bc268055222b84bf416d7d0d801a86d6be4635fdd"
+  }
+}

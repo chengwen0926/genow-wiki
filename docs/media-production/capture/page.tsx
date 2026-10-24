@@ -1,10 +1,11 @@
 "use client";
 import {useEffect,useState} from 'react';
 import {ConsoleToolbar} from '@/components/console/toolbar/ConsoleToolbar';
+import {useAuthStore} from '@/store/auth/useAuthStore';
 import type {GenerationMode} from '@/types/console';
 export default function Page(){
  const [mode,setMode]=useState<GenerationMode>('image');const [model,setModel]=useState('seedream_v4_5');const [ratio,setRatio]=useState('1:1');const [count,setCount]=useState(1);const [kind,setKind]=useState('');
- useEffect(()=>{const k=new URLSearchParams(location.search).get('scene')||'empty';setKind(k);if(k.startsWith('video')){setMode('video');setModel('seedance_v2_0');setRatio('16:9')}},[]);
+ useEffect(()=>{useAuthStore.getState().setUser({id:'docs-demo',username:'docs_demo',nickname:'文档演示',organization:null,avatar_url:null,role:'user',is_active:true,last_login:null,preferences:{console_panels:{templates:true,optimization:true}}});const k=new URLSearchParams(location.search).get('scene')||'empty';setKind(k);if(k.startsWith('video')){setMode('video');setModel('seedance_v2_0');setRatio('16:9')}},[]);
  const prompt=kind==='empty'?'':kind.startsWith('video')?'镜头缓慢推近白色咖啡杯，杯口热气轻轻上升，保持杯子外形稳定。':kind==='reference'?'保留参考图中杯子的形状和颜色，将背景改为浅米色摄影棚，使用柔和侧光。':'一杯白色陶瓷杯盛装的拿铁放在浅色木桌上，清晨自然光，背景轻微虚化，不添加文字。';
  return <><header className="capture-header"><span className="capture-brand">Genow <span style={{fontSize:13,fontWeight:400,marginLeft:20,color:'var(--text-muted)'}}>控制台</span></span><span className="capture-note">文档演示 · 独立空白场景</span></header><div className="stage"><div className="empty-copy"><strong>从一个想法开始创作</strong>本场景没有生成历史</div><div className="toolbar-wrap">{kind&&<ConsoleToolbar key={kind} mode={mode} model={model} videoModel="seedance_v2_0" aspectRatio={ratio} count={count} submissionPhase="idle" submissionBlocked={false} coolingDown={false} onModeChange={m=>{setMode(m);setModel(m==='image'?'seedream_v4_5':'seedance_v2_0')}} onModelChange={setModel} onAspectRatioChange={setRatio} onCountChange={setCount} onSubmit={async()=>({accepted:false} as never)} onOptimizePrompt={()=>{}} refiningPrompt={false} initialPrompt={prompt} initialVideoMode={kind==='video-frame'?'first_last_frame':'text_to_video'} initialDuration={5} initialResolution="2K" initialImageUrls={kind==='reference'?['http://localhost:3116/cup.svg']:[]} initialFirstFrame={kind==='video-frame'?'http://localhost:3116/cup.svg':''} />}</div></div></>;
 }
