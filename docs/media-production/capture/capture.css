@@ -1,0 +1,8 @@
+@import "__GENOW_FRONTEND__/src/styles/global.css";
+@source "__GENOW_FRONTEND__/src";
+body{margin:0;background:var(--app-background);color:var(--text-primary);font-family:Arial,"PingFang SC",sans-serif}
+.capture-header{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;border-bottom:1px solid var(--border-subtle);font-size:14px}
+.capture-brand{font-size:21px;font-weight:600}.capture-note{color:var(--text-muted);font-size:12px}
+.stage{position:relative;height:calc(100vh - 64px)}.toolbar-wrap{position:absolute;bottom:64px;width:900px;left:50%;transform:translateX(-50%)}
+.empty-copy{position:absolute;top:80px;left:0;width:100%;text-align:center;color:var(--text-muted);font-size:14px}
+.empty-copy strong{display:block;color:var(--text-primary);font-weight:500;font-size:27px;margin-bottom:12px}

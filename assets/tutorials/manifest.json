@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "capturedAt": "2026-10-23",
+  "source": "genow-v2 real components in isolated documentation fixture",
+  "videos": [
+    {
+      "file": "image-setup.mp4",
+      "title": "图片生成：提交前的三项检查",
+      "poster": "image-setup-poster.jpg",
+      "captions": "image-setup.zh-CN.vtt",
+      "duration": 15,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "reference-guide.mp4",
+      "title": "参考图：从素材到引用标签",
+      "poster": "reference-guide-poster.jpg",
+      "captions": "reference-guide.zh-CN.vtt",
+      "duration": 15,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "video-setup.mp4",
+      "title": "视频生成：首帧模式设置",
+      "poster": "video-setup-poster.jpg",
+      "captions": "video-setup.zh-CN.vtt",
+      "duration": 15,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "canvas-connect.mp4",
+      "title": "画布：连接图片与视频节点",
+      "poster": "canvas-connect-poster.jpg",
+      "captions": "canvas-connect.zh-CN.vtt",
+      "duration": 15,
+      "width": 1920,
+      "height": 1080
+    }
+  ]
+}

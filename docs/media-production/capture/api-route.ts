@@ -1,0 +1,2 @@
+export async function GET(request:Request){if(new URL(request.url).pathname.endsWith('/reference-materials'))return Response.json({items:[{id:'docs-cup',name:'白色咖啡杯正面',url:'http://localhost:3116/cup.svg',objectKey:'docs/cup.svg'}],total:1});return Response.json({items:[],elements:[],subjects:[],total:0,has_more:false})}export async function POST(){return Response.json({detail:'演示环境不提交生成任务'},{status:405})}
+export async function PATCH(request:Request){return Response.json(await request.json())}

@@ -9,6 +9,7 @@ export type WikiPage = {
   slug: string; href: string; title: string; markdown: string;
   headings: WikiHeading[]; images: Record<string, { width?: number; height?: number }>;
   description: string; updatedAt: string | null;
+  group: string; groupTitle: string; order: number; keywords: string; hidden: boolean;
 };
 
 export const getWiki = cache(async (): Promise<{ tree: WikiTreeNode[]; pages: WikiPage[] }> => readWiki());

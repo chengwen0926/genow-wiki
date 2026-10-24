@@ -4,6 +4,7 @@ import remarkGfm from "remark-gfm";
 import { remarkHeadings } from "@/lib/markdown.mjs";
 import type { WikiPage } from "@/lib/wiki";
 import { ImageCard, VideoCard } from "./WikiMedia";
+import tutorials from "../../assets/tutorials/manifest.json";
 
 function textContent(children: ReactNode): string {
   if (typeof children === "string" || typeof children === "number") return String(children);
@@ -23,7 +24,13 @@ export function WikiContent({ page }: { page: WikiPage }) {
       img: ({ src, alt }) => typeof src === "string"
         ? <ImageCard src={src} alt={alt ?? ""} {...(page.images[src] ?? page.images[decodeURI(src)])} /> : null,
       a: ({ href, children }) => href && /\.mp4(?:[?#]|$)/i.test(href)
-        ? <VideoCard src={href} label={textContent(children)} />
+        ? (() => {
+          const media = tutorials.videos.find(item => href === `/media/tutorials/${item.file}`);
+          return <VideoCard src={href} label={textContent(children)}
+            poster={media ? `/media/tutorials/${media.poster}` : undefined}
+            captions={media ? `/media/tutorials/${media.captions}` : undefined}
+            duration={media?.duration} />;
+        })()
         : <a href={href}>{children}</a>,
     }}>{page.markdown}</ReactMarkdown>
   </div>;

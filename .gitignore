@@ -12,3 +12,10 @@ log/
 frontend/out/
 frontend/public/media/
 *.tsbuildinfo
+
+frontend/public/pagefind/
+
+# Local video production intermediates
+docs/media-production/video/.hyperframes/
+docs/media-production/video/renders/
+docs/media-production/video/tutorials-master.mp4

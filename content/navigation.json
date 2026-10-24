@@ -1,0 +1,26 @@
+[
+  {
+    "id": "start",
+    "title": "开始使用"
+  },
+  {
+    "id": "create",
+    "title": "创作功能"
+  },
+  {
+    "id": "collaborate",
+    "title": "协作与发布"
+  },
+  {
+    "id": "practice",
+    "title": "案例与排查"
+  },
+  {
+    "id": "admin",
+    "title": "管理员指南"
+  },
+  {
+    "id": "reference",
+    "title": "速查与参考"
+  }
+]

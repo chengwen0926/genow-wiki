@@ -1,0 +1,1 @@
+import './capture.css';export default function Layout({children}:{children:React.ReactNode}){return <html lang="zh-CN" className="dark"><body>{children}</body></html>}

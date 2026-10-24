@@ -7,6 +7,7 @@
     "build": "npm --prefix frontend run build",
     "preview": "npm --prefix frontend run preview --",
     "test": "npm --prefix frontend test",
-    "typecheck": "npm --prefix frontend run typecheck"
+    "typecheck": "npm --prefix frontend run typecheck",
+    "verify-tutorials": "npm --prefix frontend run verify-tutorials --"
   }
 }

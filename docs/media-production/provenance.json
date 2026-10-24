@@ -1,0 +1,15 @@
+{
+  "capturedAt": "2026-10-23",
+  "sourceCommit": "91217e7ce0113901e5b652ca1e680faf9145e6de",
+  "note": "Captured from current working tree, not solely HEAD. Demo API uses synthetic data. No real generation was submitted.",
+  "files": {
+    "frontend/src/components/console/toolbar/ConsoleToolbar.tsx": "5f2fe7530c9b5a9bdcacb2e57700ce9ebd6951e463ce8a6d52b4cafede5371cf",
+    "frontend/src/components/shared/generation/ImageModelSelector.tsx": "a9d84d0be526a0fd9ba6a7a10f7add1c91b6956c9b4e88adee4ee3cf49d78c37",
+    "frontend/src/components/shared/generation/ImageParamsPanel.tsx": "febac6138c29e76954c29cd9a93f925242211060164e04237bf43e9c86ad145a",
+    "frontend/src/components/shared/generation/VideoParamsPanel.tsx": "4f37f7bf6af2d142d5e6a241a67603598bc88d60e21b5200e596860b500b9eaa",
+    "frontend/src/components/shared/generation/PromptEditor.tsx": "a75f5b6dbaf8e616b8155a58ccf55e6417ede9df92c4b6ec6f3991ea7b0b593d",
+    "frontend/src/components/canvas/nodes/ImageNode.tsx": "768aa794b9f2e8f4b4883a1862889419d45ce5e368c714b7bccc8edad9cf220d",
+    "frontend/src/components/canvas/nodes/VideoNode.tsx": "3f3ee4b77cf3e793179c6ecae67d38f397f4a6622509d810f1adc01283553652",
+    "frontend/src/components/canvas/panels/FloatingNodePanel.tsx": "b68c51636dd0fca7ae3eaaf5282cdb1a3a8666261168fdcc17909a22ae60e57b"
+  }
+}

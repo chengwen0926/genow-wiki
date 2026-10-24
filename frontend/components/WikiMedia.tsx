@@ -18,9 +18,12 @@ export function ImageCard({ src, alt, width, height }: {
   </div>;
 }
 
-export function VideoCard({ src, label }: { src: string; label: string }) {
+export function VideoCard({ src, label, poster, captions, duration }: {
+  src: string; label: string; poster?: string; captions?: string; duration?: number;
+}) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [ready, setReady] = useState(false);
+  const [failed, setFailed] = useState(false);
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -38,9 +41,13 @@ export function VideoCard({ src, label }: { src: string; label: string }) {
     };
   }, []);
   return <div className="video-frame">
-    <span className="media-label">{label}</span>
+    <span className="media-label">{label}{duration ? ` · ${duration} 秒 · 分步讲解` : ""}</span>
     <video ref={videoRef} src={ready ? src : undefined} controls playsInline muted preload="none"
-      aria-label={label} onFocus={() => setReady(true)} onPointerDown={() => setReady(true)} />
+      poster={poster} aria-label={label} onFocus={() => setReady(true)} onPointerDown={() => setReady(true)}
+      onError={() => setFailed(true)}>
+      {captions && <track kind="captions" src={captions} srcLang="zh-CN" label="简体中文" />}
+    </video>
+    <div className="video-meta"><span>{failed ? "视频加载失败，可通过右侧链接打开。" : captions ? "静音讲解 · 支持字幕 · 可全屏查看" : "按需播放"}</span><a href={src} download>下载视频</a></div>
     <noscript><a href={src}>{label}</a></noscript>
   </div>;
 }
