@@ -4,9 +4,20 @@ import { fileURLToPath } from "node:url";
 import send from "next/dist/compiled/send/index.js";
 
 const root = fileURLToPath(new URL("../out/", import.meta.url));
-await access(`${root}/index.html`);
+try {
+  await access(`${root}/index.html`);
+} catch {
+  console.error("未找到构建产物，请先在项目根目录运行 npm run build。");
+  process.exit(1);
+}
+const production = process.argv.includes("--production");
+const host = production ? "0.0.0.0" : "127.0.0.1";
 const portIndex = process.argv.indexOf("--port");
 let port = Number(portIndex >= 0 ? process.argv[portIndex + 1] : 3002);
+if (!Number.isInteger(port) || port < 1 || port > 65535) {
+  console.error("端口必须为 1–65535 的整数。");
+  process.exit(1);
+}
 const server = http.createServer((request, response) => {
   if (!["GET", "HEAD"].includes(request.method)) {
     response.writeHead(405, { Allow: "GET, HEAD" }).end();
@@ -28,8 +39,12 @@ const server = http.createServer((request, response) => {
   stream.pipe(response);
 });
 server.on("error", (error) => {
-  if (error.code === "EADDRINUSE") server.listen(++port, "127.0.0.1");
+  if (error.code === "EADDRINUSE" && !production && port < 65535) server.listen(++port, host);
+  else if (error.code === "EADDRINUSE") {
+    console.error(`端口 ${port} 已被占用，服务未启动。请先确认并停止该端口上的旧 Wiki 服务，然后重试；不会自动换端口或终止其他进程。`);
+    process.exit(1);
+  }
   else { console.error(error); process.exit(1); }
 });
-server.on("listening", () => console.log(`Static preview: http://localhost:${port}`));
-server.listen(port, "127.0.0.1");
+server.on("listening", () => console.log(`${production ? "Wiki server" : "Static preview"}: http://${host}:${port}`));
+server.listen(port, host);

@@ -11,7 +11,8 @@
     "typecheck": "tsc --noEmit",
     "verify-export": "node scripts/verify-export.mjs",
     "build-search": "node scripts/build-search.mjs",
-    "verify-tutorials": "node scripts/verify-tutorials.mjs"
+    "verify-tutorials": "node scripts/verify-tutorials.mjs",
+    "start": "node scripts/preview.mjs --production"
   },
   "dependencies": {
     "gray-matter": "4.0.3",

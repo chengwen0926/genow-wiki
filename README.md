@@ -24,7 +24,7 @@ npm run preview
 
 `build` 包含媒体同步、静态导出、Pagefind 中文索引生成和导出内容检查。产物位于 `frontend/out/`。`preview` 使用 Next.js 自带的静态文件库，仅为本地验收服务，绑定 `127.0.0.1`，默认端口 3002，被占用时自动尝试下一个端口；也可指定 `npm run preview -- --port 3003`。支持视频 Range 请求、目录索引与 404。
 
-构建固定使用 Webpack，避免当前环境中 Turbopack 的临时端口限制。Node.js 仅用于开发、构建和本地预览；生产托管无需安装 npm 依赖。
+构建固定使用 Webpack，避免当前环境中 Turbopack 的临时端口限制。直接使用 Nginx 等静态托管时，Node.js 仅用于开发和构建；下方兼容旧端口的 npm start 方式仍需 Node.js 和前端依赖。
 
 ## 内容维护
 
@@ -70,6 +70,24 @@ Pagefind 1.5.2 Extended 在构建后扫描 `out/wiki/`，仅索引带 `data-page
 开发搜索使用最近一次构建生成的索引：首次运行或更新文章后先执行 `npm run build`，再启动 `npm run dev`。页面开发会实时更新，但搜索索引不会热更新。验收时推荐 `npm run preview -- --port 3004`，避免与业务应用的 3002 端口冲突。`frontend/public/pagefind/` 和 `frontend/out/pagefind/` 都是生成文件，不应手工编辑或提交。
 
 旧版 `console-mode`、`canvas-mode`、`history`、`sketch-mode`、`other` 地址保留为新版引导页，原始内容位于 `docs/legacy/`。这些旧资料与截图未重新核对当前界面，不直接显示在用户导航中。
+
+## 保留原域名的旧端口部署
+
+旧版 `setup.py` 启动的前端使用 3002 端口。新版可在原部署服务器的项目根目录执行：
+
+```bash
+npm run setup
+npm run build
+npm start
+```
+
+`npm start` 使用 Node.js 提供 `frontend/out/` 静态文件服务，默认监听 `0.0.0.0:3002`，允许原反向代理通过服务器 IP 访问。若原域名仍指向同一服务器的 3002 端口，且原来以域名根路径提供网站，通常无需更改域名或代理配置。HTTPS 仍由原入口处理；该命令不会配置 DNS、证书或反向代理，也不恢复旧的 8002 后端和 API。
+
+端口被占用时启动失败并明确报错，不自动换端口，也不终止占用进程。切换时先确认并停止旧 Wiki 服务，不能误停共用机器上的其他应用。可用 `npm start -- --port 3005` 显式指定其他端口，但保留原代理时应继续使用 3002。
+
+命令以前台方式运行，关闭会话会停止服务。正式服务器应交由现有 systemd、PM2 或面板进程管理器运行：工作目录设为本项目根目录，启动命令设为 `npm start`。如果原进程管理器运行 `python setup.py`，需要替换该启动命令。更新时先完成构建，再切换服务；持续访问场景建议使用独立版本目录，避免在正在服务的 `out/` 上构建。
+
+验收应检查原域名首页、文章直接访问和刷新、搜索、图片和视频；仅本机 3002 可访问不能证明域名已经接通。
 
 ## 静态部署
 

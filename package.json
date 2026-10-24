@@ -8,6 +8,7 @@
     "preview": "npm --prefix frontend run preview --",
     "test": "npm --prefix frontend test",
     "typecheck": "npm --prefix frontend run typecheck",
-    "verify-tutorials": "npm --prefix frontend run verify-tutorials --"
+    "verify-tutorials": "npm --prefix frontend run verify-tutorials --",
+    "start": "npm --prefix frontend run start --"
   }
 }
