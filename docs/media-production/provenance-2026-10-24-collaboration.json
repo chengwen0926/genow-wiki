@@ -1,0 +1,30 @@
+{
+  "capturedAt": "2026-10-24",
+  "sourceCommit": "988416aa52e6312d3964a90c08a1ae60c463d544",
+  "note": "Real working-tree React components in Chrome with isolated synthetic members, invitations, folders, media and pin. No invitations, role changes, file changes, pin applications or publications submitted. Full browser screenshot 1512x827, rectangular extraction only. macOS locked: native application capture unavailable; no Retina or verified zoom claim. Images displayed without upscaling.",
+  "files": {
+    "frontend/src/components/console/ConsolePinsPanel.tsx": "2b6411576dc8112640501c874176547eacd75abcc4d08bc8d6628a8e586eff2b",
+    "frontend/src/hooks/console/useConsolePins.ts": "14f7b8b23bd655b7c0161e1cea44aa3a3755872de50302608d631e1cd7666ac9",
+    "frontend/src/components/canvas/editor/CanvasEditor.tsx": "5ea04371408483071432df0b059d8fc28e6d06d140d9cf89cf4b26d2d5bc8a1e",
+    "frontend/src/components/canvas/editor/UserAvatarsBar.tsx": "7f2f7c44d4887b37add028016ff1e34c9a273498cf6d9156e795e590d91a5aff",
+    "frontend/src/components/canvas/panels/ProjectMaterialLibrary.tsx": "aef954a17f1a37d2a82bc3e751db28acbd4b2a98c365f4b5affe4de8011c67a8",
+    "frontend/src/components/playground/UploadToPlayground.tsx": "b11493c42c510cc789e77bad720de641325ce47bac1e26c634bf7a4360d6a579",
+    "frontend/src/components/playground/PlaygroundPreviewCard.tsx": "e5f7f6e079bdf719968b322e537754a4b38f5caae0abae9a3265f4009b123c84"
+  },
+  "images": {
+    "console-pin.jpg": "c9ecb4c5b247de6cae0a8daa2690d16706ed95dbaddaf1aafa3e87c98af5c760",
+    "team-invite.jpg": "88378c440c5e6d265b26aaa64938a254bb0c8451eeef8284022d64d715ab6c1b",
+    "team-roles.jpg": "27c1f137aa0599f20db9755ed53c39b56783802ed60d5b8cac8d8b0da342adc2",
+    "shared-folders.jpg": "4578a1143398fcef1d478fe5d2dae91d59ca4d6c6efaef289b3b8b8cdda51619",
+    "shared-folder-detail.jpg": "d996402cd66d71beb20a12928cedb81a66ecba8984f24ec6defc952829a8884a",
+    "playground-preview.jpg": "7dd0c5df7c5a4b60362b6ecd125f43e7e6110d8abcd1436334360afce0282371"
+  },
+  "originalScreenshots": {
+    "console-pin-full.jpg": "d402c68deadc6d2479e841b3d9bc50dd079fc3e4305aa79ab3b53a7ac39e4744",
+    "team-invite-full.jpg": "55b51e97da01934101987a1e03908bea4106acae3c54465ae7639f2e57186839",
+    "team-roles-full.jpg": "8f68320331e866b5f67732be2d07c6bf0c72610d8544d396726c3dd5a06cbbf6",
+    "shared-folders-full.jpg": "e6feb8b3a1e38d34f752b66f64bfa91378a28a922dc12e8a4cd32d5c901397d5",
+    "shared-folder-detail-full.jpg": "7e15a979250cb22e140b493aa518ec8794dc17a817c9698fea82747f9d700cee",
+    "playground-preview-full.jpg": "6302fc1815829400a2ee30866429dc3c692c220fa4b5c6607f617950b0824aec"
+  }
+}

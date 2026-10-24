@@ -1,0 +1,44 @@
+{
+  "sourceSize": [
+    1512,
+    827
+  ],
+  "crops": {
+    "console-pin": {
+      "left": 0,
+      "top": 64,
+      "width": 378,
+      "height": 280
+    },
+    "team-invite": {
+      "left": 496,
+      "top": 211,
+      "width": 520,
+      "height": 406
+    },
+    "team-roles": {
+      "left": 496,
+      "top": 245,
+      "width": 520,
+      "height": 336
+    },
+    "shared-folders": {
+      "left": 8,
+      "top": 80,
+      "width": 528,
+      "height": 370
+    },
+    "shared-folder-detail": {
+      "left": 8,
+      "top": 80,
+      "width": 528,
+      "height": 370
+    },
+    "playground-preview": {
+      "left": 570,
+      "top": 171,
+      "width": 372,
+      "height": 486
+    }
+  }
+}

@@ -7,7 +7,7 @@ export function ImageCard({ src, alt, width, height }: {
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   return <div className="image-frame">
-    <button type="button" className="image-button" aria-label={`放大查看：${alt || "图片"}`}
+    <button type="button" className="image-button" style={width ? { maxWidth: width } : undefined} aria-label={`放大查看：${alt || "图片"}`}
       onClick={() => dialogRef.current?.showModal()}>
       <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
     </button>

@@ -9,7 +9,7 @@ const frontend=path.resolve(process.argv[2]||path.join(wiki,'../genow-v2/fronten
 if(!existsSync(path.join(frontend,'node_modules/next')))throw Error('先在 genow-v2/frontend 安装依赖，或传入该 frontend 的路径');
 const workspace=mkdtempSync(path.join(tmpdir(),'genow-doc-capture-'));
 mkdirSync(path.join(workspace,'app/canvas'),{recursive:true});
-for(const route of ['share','settings','assets','workflow','frame'])mkdirSync(path.join(workspace,'app',route),{recursive:true});
+for(const route of ['share','settings','assets','workflow','frame','team','pins','publish'])mkdirSync(path.join(workspace,'app',route),{recursive:true});
 mkdirSync(path.join(workspace,'app/api/v1/[...path]'),{recursive:true});
 mkdirSync(path.join(workspace,'public'),{recursive:true});
 symlinkSync(path.join(frontend,'node_modules'),path.join(workspace,'node_modules'));
@@ -17,7 +17,7 @@ writeFileSync(path.join(workspace,'package.json'),JSON.stringify({name:'genow-do
 writeFileSync(path.join(workspace,'tsconfig.json'),JSON.stringify({compilerOptions:{target:'ES2022',jsx:'preserve',strict:true,esModuleInterop:true,moduleResolution:'bundler',paths:{'@/*':[path.join(frontend,'src/*')]}},include:['app/**/*.tsx','app/**/*.ts']}));
 writeFileSync(path.join(workspace,'next.config.js'),`module.exports={devIndicators:false,webpack(c){c.resolve.alias['@']=${JSON.stringify(path.join(frontend,'src'))};return c;}}`);
 writeFileSync(path.join(workspace,'postcss.config.js'),"module.exports={plugins:{'@tailwindcss/postcss':{}}}");
-for(const [from,to] of [['demo-data.ts','app/demo-data.ts'],['settings-page.tsx','app/settings/page.tsx'],['assets-page.tsx','app/assets/page.tsx'],['workflow-page.tsx','app/workflow/page.tsx'],['frame-page.tsx','app/frame/page.tsx'],['sample-clip.mp4','public/sample-clip.mp4'],['page.tsx','app/page.tsx'],['canvas-page.tsx','app/canvas/page.tsx'],['share-page.tsx','app/share/page.tsx'],['api-route.ts','app/api/v1/[...path]/route.ts'],['layout.tsx','app/layout.tsx'],['cup.svg','public/cup.svg']])cpSync(path.join(sources,from),path.join(workspace,to));
+for(const [from,to] of [['collaboration-data.ts','app/collaboration-data.ts'],['team-page.tsx','app/team/page.tsx'],['pins-page.tsx','app/pins/page.tsx'],['publish-page.tsx','app/publish/page.tsx'],['demo-data.ts','app/demo-data.ts'],['settings-page.tsx','app/settings/page.tsx'],['assets-page.tsx','app/assets/page.tsx'],['workflow-page.tsx','app/workflow/page.tsx'],['frame-page.tsx','app/frame/page.tsx'],['sample-clip.mp4','public/sample-clip.mp4'],['page.tsx','app/page.tsx'],['canvas-page.tsx','app/canvas/page.tsx'],['share-page.tsx','app/share/page.tsx'],['api-route.ts','app/api/v1/[...path]/route.ts'],['layout.tsx','app/layout.tsx'],['cup.svg','public/cup.svg']])cpSync(path.join(sources,from),path.join(workspace,to));
 writeFileSync(path.join(workspace,'app/capture.css'),readFileSync(path.join(sources,'capture.css'),'utf8').replaceAll('__GENOW_FRONTEND__',frontend));
 cpSync(path.join(frontend,'public/models'),path.join(workspace,'public/models'),{recursive:true});
 console.log('独立截图环境：http://localhost:3116/?scene=empty\n目录：'+workspace+'\n只使用本地演示接口，不读取账号或生成历史；Ctrl+C 停止。');

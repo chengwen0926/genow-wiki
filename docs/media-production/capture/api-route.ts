@@ -1,3 +1,4 @@
+import {teamProject,members,candidates,folders,materials,pin} from '../../../collaboration-data';
 import {demoUser,templateId,project,graph,assetItems,videoTask} from '../../../demo-data';
 const content = '主体：一朵透明玻璃鸢尾花，花瓣边缘清晰，保留细微折射。\n\n场景：深蓝色夜幕中的浅水庭院，水面平静，只有一圈轻微涟漪。\n\n视觉：月光从侧后方勾勒花瓣，留出大面积暗部，克制的电影感构图。\n\n限制：不增加文字、水印或无关物体。';
 const templates = ['system','personal'].map((scope,index)=>({id:`docs-template-${index}`,scope,name:index?'月光玻璃花园':'静物摄影基础',description:null,content,sections:[{id:'docs-section',type:'section',content}],is_active:true,created_at:'2026-10-24T00:00:00Z',updated_at:'2026-10-24T00:00:00Z'}));
@@ -8,6 +9,13 @@ if(path.endsWith('/generation/assets')){const params=new URL(request.url).search
 if(path.endsWith('/workflow-templates'))return Response.json({items:[{id:templateId,title:graph.title,description:graph.description,node_count:2,cover_url:'/cup.svg',removed:false,updated_at:'2026-10-24'}],total:1});
 if(path.endsWith('/workflow-templates/'+templateId))return Response.json({id:templateId,graph,content_hash:'docs-only',media_urls:{},removed:false,updated_at:'2026-10-24'});
 if(path.endsWith('/canvas-projects/docs-workflow/snapshot'))return Response.json({project,items:[],connections:[]});
+if(path.endsWith('/canvas-projects/docs-team/snapshot'))return Response.json({project:teamProject,items:[],connections:[]});
+if(path.endsWith('/canvas-projects/docs-team/members'))return Response.json({members,can_invite:true});
+if(path.endsWith('/canvas-projects/docs-team/invite-candidates')){const q=new URL(request.url).searchParams.get('q')||'';const users=candidates.filter(u=>(u.nickname+u.username).includes(q));return Response.json({users,total:users.length,page:1,size:20});}
+if(path.endsWith('/canvas-projects/docs-team/material-folders'))return Response.json({items:folders});
+if(path.endsWith('/canvas-projects/docs-team/materials')){const params=new URL(request.url).searchParams,q=params.get('q')||'',folder=params.get('folder_id');const items=materials.filter(m=>q?m.name.includes(q):m.folderId===folder);return Response.json({items,total:items.length});}
+if(path.endsWith('/console/generation-pins'))return Response.json({items:[pin],next_cursor:null});
+if(path.endsWith('/console/generation-pins/docs-pin'))return Response.json(pin);
 if(path.endsWith('/members'))return Response.json({members:[],invitations:[]});
 if(path.endsWith('/models/available'))return Response.json({version:'docs-2026-10-24',models:[{id:'seedream_v4_5',kind:'image',supports_edit:true},{id:'seedance_v2_0',kind:'video'}]});
 if(path.endsWith('/prompt-templates'))return Response.json({items:templates,total:templates.length,default_template_id:null});
