@@ -1,8 +1,10 @@
+import {completeGet,completeWrite} from '../../../complete-api';
 import {teamProject,members,candidates,folders,materials,pin} from '../../../collaboration-data';
 import {demoUser,templateId,project,graph,assetItems,videoTask} from '../../../demo-data';
 const content = '主体：一朵透明玻璃鸢尾花，花瓣边缘清晰，保留细微折射。\n\n场景：深蓝色夜幕中的浅水庭院，水面平静，只有一圈轻微涟漪。\n\n视觉：月光从侧后方勾勒花瓣，留出大面积暗部，克制的电影感构图。\n\n限制：不增加文字、水印或无关物体。';
 const templates = ['system','personal'].map((scope,index)=>({id:`docs-template-${index}`,scope,name:index?'月光玻璃花园':'静物摄影基础',description:null,content,sections:[{id:'docs-section',type:'section',content}],is_active:true,created_at:'2026-10-24T00:00:00Z',updated_at:'2026-10-24T00:00:00Z'}));
 export async function GET(request:Request){
+const extra=await completeGet(request);if(extra)return extra;
 const path = new URL(request.url).pathname;
 if(path.endsWith('/events'))return new Response(null,{status:204});
 if(path.endsWith('/generation/assets')){const params=new URL(request.url).searchParams;const items=assetItems.filter(i=>(params.get('sources')||'').split(',').includes(i.sourceKind)&&(params.get('types')||'').split(',').includes(i.type)&&(!(params.get('favorited')==='true')||i.favoritedAt));return Response.json({items,total:items.length,tasks:{'docs-still':{...videoTask,id:'docs-still',mode:'image',model:'seedream_v4_5'},'docs-clip':videoTask}})}
@@ -22,6 +24,7 @@ if(path.endsWith('/prompt-templates'))return Response.json({items:templates,tota
 if(path.includes('/prompt-templates/'))return Response.json(templates.find(item=>path.endsWith(item.id))??templates[0]);
 if(path.endsWith('/material-shares/recipients'))return Response.json({items:[{id:'docs-reviewer',name:'演示审核员',username:'demo_reviewer'}]});
 if(new URL(request.url).pathname.endsWith('/reference-materials'))return Response.json({items:[{id:'docs-cup',name:'白色咖啡杯正面',url:'http://localhost:3116/cup.svg',objectKey:'docs/cup.svg'}],total:1});return Response.json({items:[],elements:[],subjects:[],total:0,has_more:false})}export async function POST(request:Request){
+const extra=await completeWrite(request);if(extra)return extra;
 if(new URL(request.url).pathname.endsWith('/canvas-projects/docs-workflow/template-imports')){const data=await request.json();if(data.template_id!==templateId)return Response.json({detail:'仅支持文档示例模板'},{status:400});return Response.json({items:graph.items.map(n=>({...n,project_id:project.id,position_x:n.position_x+Number(data.x),position_y:n.position_y+Number(data.y),last_output:{},last_run_status:'idle'})),connections:graph.connections.map(e=>({...e,project_id:project.id})),undo_token:'docs-only'});}
 return Response.json({detail:'演示环境不提交生成任务'},{status:405})}
-export async function PATCH(request:Request){const data=await request.json();if(new URL(request.url).pathname.endsWith('/auth/me/console-panels'))return Response.json({...demoUser,preferences:{console_panels:{...demoUser.preferences.console_panels,...data}}});return Response.json(data)}
+export async function PATCH(request:Request){const extra=await completeWrite(request);if(extra)return extra;const data=await request.json();if(new URL(request.url).pathname.endsWith('/auth/me/console-panels'))return Response.json({...demoUser,preferences:{console_panels:{...demoUser.preferences.console_panels,...data}}});return Response.json(data)}

@@ -1,0 +1,236 @@
+{
+  "navigation": {
+    "left": 980,
+    "top": 5,
+    "width": 600,
+    "height": 85
+  },
+  "personal-usage": {
+    "left": 515,
+    "top": 235,
+    "width": 1530,
+    "height": 845
+  },
+  "personal-keys": {
+    "left": 515,
+    "top": 235,
+    "width": 1530,
+    "height": 465
+  },
+  "project-create": {
+    "left": 985,
+    "top": 370,
+    "width": 590,
+    "height": 580
+  },
+  "admin-user-create": {
+    "left": 985,
+    "top": 345,
+    "width": 590,
+    "height": 630
+  },
+  "admin-user-storage": {
+    "left": 985,
+    "top": 310,
+    "width": 590,
+    "height": 700
+  },
+  "admin-models": {
+    "left": 365,
+    "top": 75,
+    "width": 1190,
+    "height": 350
+  },
+  "admin-model-order": {
+    "left": 365,
+    "top": 75,
+    "width": 1190,
+    "height": 350
+  },
+  "admin-video-usage": {
+    "left": 365,
+    "top": 75,
+    "width": 1190,
+    "height": 350
+  },
+  "admin-storage": {
+    "left": 365,
+    "top": 75,
+    "width": 1190,
+    "height": 520
+  },
+  "admin-storage-runtime": {
+    "left": 1230,
+    "top": 0,
+    "width": 690,
+    "height": 720
+  },
+  "admin-errors": {
+    "left": 365,
+    "top": 75,
+    "width": 1190,
+    "height": 480
+  },
+  "admin-dashboard": {
+    "left": 230,
+    "top": 75,
+    "width": 1460,
+    "height": 550
+  },
+  "admin-system-template": {
+    "left": 680,
+    "top": 75,
+    "width": 1200,
+    "height": 850
+  },
+  "admin-announcement-edit": {
+    "left": 365,
+    "top": 75,
+    "width": 1190,
+    "height": 740
+  },
+  "admin-announcement-history": {
+    "left": 365,
+    "top": 75,
+    "width": 1190,
+    "height": 460
+  },
+  "admin-workflow-save": {
+    "left": 0,
+    "top": 64,
+    "width": 2560,
+    "height": 1000
+  },
+  "notifications-invite": {
+    "left": 580,
+    "top": 160,
+    "width": 760,
+    "height": 470
+  },
+  "notifications-sent": {
+    "left": 580,
+    "top": 160,
+    "width": 760,
+    "height": 470
+  },
+  "share-received": {
+    "left": 580,
+    "top": 220,
+    "width": 1400,
+    "height": 880
+  },
+  "playground-browse": {
+    "left": 675,
+    "top": 75,
+    "width": 1210,
+    "height": 570
+  },
+  "playground-details": {
+    "left": 600,
+    "top": 165,
+    "width": 1390,
+    "height": 910
+  },
+  "vidu-create": {
+    "left": 580,
+    "top": 425,
+    "width": 350,
+    "height": 345
+  },
+  "kling-create": {
+    "left": 580,
+    "top": 360,
+    "width": 350,
+    "height": 435
+  },
+  "paint-tools": {
+    "left": 0,
+    "top": 0,
+    "width": 1512,
+    "height": 827
+  },
+  "paint-saved": {
+    "left": 195,
+    "top": 260,
+    "width": 750,
+    "height": 290
+  },
+  "paint-connected": {
+    "left": 190,
+    "top": 170,
+    "width": 1190,
+    "height": 530
+  },
+  "canvas-copy-empty": {
+    "left": 215,
+    "top": 345,
+    "width": 1490,
+    "height": 440
+  },
+  "canvas-delete-confirm": {
+    "left": 610,
+    "top": 340,
+    "width": 700,
+    "height": 630
+  },
+  "video-frames": {
+    "left": 495,
+    "top": 770,
+    "width": 930,
+    "height": 285
+  },
+  "video-smart": {
+    "left": 495,
+    "top": 770,
+    "width": 930,
+    "height": 285
+  },
+  "missing-required": {
+    "left": 495,
+    "top": 770,
+    "width": 930,
+    "height": 285
+  },
+  "personal-material-actions": {
+    "left": 70,
+    "top": 130,
+    "width": 470,
+    "height": 470
+  },
+  "asset-delete-confirm": {
+    "left": 145,
+    "top": 75,
+    "width": 1080,
+    "height": 340
+  },
+  "asset-filter-empty": {
+    "left": 690,
+    "top": 75,
+    "width": 540,
+    "height": 560
+  },
+  "generation-failure": {
+    "left": 590,
+    "top": 130,
+    "width": 740,
+    "height": 270
+  },
+  "team-move-before": {
+    "left": 70,
+    "top": 130,
+    "width": 470,
+    "height": 470
+  },
+  "team-move-dropped": {
+    "left": 70,
+    "top": 130,
+    "width": 470,
+    "height": 470
+  },
+  "team-move-after": {
+    "left": 70,
+    "top": 130,
+    "width": 470,
+    "height": 470
+  }
+}

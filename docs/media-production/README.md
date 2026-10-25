@@ -150,3 +150,72 @@ npm test
 裁取坐标见 `capture/crops-2026-10-24-collaboration.json`。这组内容适合静态对照，本轮不增加与截图重复的步骤短片；原有五条视频保持可用。
 
 本批验证：生产构建通过（27 个静态路由、19 篇搜索文章）；现有 5 项测试通过；六张新图全部加载，三个章节的图片放大窗口可打开；团队截图显示宽度不超过原图宽度。原有五条视频、封面与字幕随构建完成校验。
+
+## 全手册补充批次（2026-10-25）
+
+对 19 篇正式文章逐小节核对，记录见 [覆盖表](coverage-complete.md)。新增 39 张矩形裁取截图：36 张操作画面，以及共享移动的 3 张分步源图（其中完成图也用于文章）。素材库累计 68 张截图、7 条 15 秒短片、7 张封面和 7 份字幕。文章继续使用 ImageCard / VideoCard；所有图片以原始宽度为上限，可点击放大。
+
+本批使用 Chrome 在本机呈现当前 genow-v2 真实 React 组件。完整截图存在 2560×1318、1920×1102、1512×827 / 771 等尺寸；不声称全部为 macOS Retina 录屏或已核验 75% 缩放。仅矩形裁取，无重绘、补帧或 UI 合成。咖啡杯是明确标注的示意素材，统计和错误均为虚构演示数据。
+
+独立环境新增 `complete-page.tsx`、`complete-data.ts`、`complete-api.ts`，分为个人、创作、协作和管理员场景。只在内存保存标记图、空节点、连线与素材目录移动，重启即重置；其余提交被阻止。没有新增业务 API，也未修改 Genow 生产组件。
+
+### 重拍路径与停留点
+
+启动 `node docs/media-production/serve-capture.mjs ../genow-v2/frontend` 后，以 Chrome 打开 `http://localhost:3116`：
+
+| 分组 | 路径 | 操作与截图 |
+| --- | --- | --- |
+| 个人 | `/complete?scene=nav` | 导航；头像中切到用量统计、模型设置；不填密钥 |
+| 创作 | `/complete?scene=project` | 填项目名称，停在创建前 |
+| 创作 | `/complete?scene=paint` | 标记圆形→保存新节点→连接图像节点并填要求；不生成。选节点点击删除，停在确认前 |
+| 创作 | `/complete?scene=copy` | 真实组件呈现已核对的复制结果：原图旁是同类型空节点；演示位置分开便于比较 |
+| 创作 | `/?scene=video-frame`、`/?scene=video-smart` | 核对首尾帧、智能参考；清空提示词拍必填缺失 |
+| 创作 | `/complete?scene=vidu`、`kling` | 新建主体表单填写名称／外观；不上传或创建资源 |
+| 创作 | `/assets?type=all&favorite=1` | 删除选区→确认按钮前；切到个人画布来源拍空筛选 |
+| 创作 | `/complete?scene=failure` | 展示明确标注的演示错误 |
+| 协作 | `/team` | 参考素材展开菜单；共享素材根目录的杯子拖入产品原图→进入核对 |
+| 协作 | `/complete?scene=notifications`、`shareview` | 通知邀请按钮；内容分享已发送；接收方预览。无真实消息发送 |
+| 协作 | `/complete?scene=playground` | 三个分类与作品详情；不真实发布 |
+| 管理员 | `/complete?scene=users` | 新建表单、信息修改中的独立保存容量；不提交 |
+| 管理员 | `dashboard`、`models`、`usage`、`storage`、`errors` | 均为 `/complete?scene=…`；模型切分类显示排序手柄；存储打开运行详情；错误按 docs_demo 搜索并展开 |
+| 管理员 | `templates`、`template`、`announcement` | 系统模板启用状态；工作流已保存状态；公告草稿受众与时间及已发布详情；不提交公告 |
+
+当前消息中心已移除私信撰写，因此按现有“收到的／已发送”替换原计划中的私信截图。涂抹标记保存不调用模型，个人密钥启停／删除、模型排序、Kling 必填视角及 Playground 分类说明同步更新。
+
+保存对应 `*-full.jpg`，按 `capture/crops-complete.json` 裁取。源文件尺寸变化时必须重新审查矩形，不可沿用错误坐标：
+
+```sh
+node docs/media-production/crop-complete-screenshots.mjs /path/to/full-screenshots
+```
+
+`provenance-complete.json` 保存源图尺寸、裁取矩形、原图／成品 SHA-256 与代码版本；`source-components-complete.json` 记录实际组件和演示文件的哈希。
+
+### 重导出两条新短片
+
+`complete-video/` 是独立 30 秒工程，前 15 秒为涂抹标记，后 15 秒为共享整理。每步 5 秒，静音中文讲解，真实截图按原始像素限制显示。修改后同步正文、WebVTT、SPEC 和 REVIEW。
+
+```sh
+mkdir -p docs/media-production/complete-video/assets/fonts
+cp '/System/Library/Fonts/STHeiti Light.ttc' docs/media-production/complete-video/assets/fonts/STHeiti-Light.ttc
+cd docs/media-production/complete-video
+npx hyperframes@0.8.186 check --json
+npx hyperframes@0.8.186 snapshot --review
+npx hyperframes@0.8.186 preview --background --port 3127
+npx hyperframes@0.8.186 render --quality delivery --fps 30 --output complete-master.mp4
+cd ../../..
+python3 docs/media-production/export-tutorials.py --group complete
+npm run verify-tutorials -- --probe
+npm test
+npm run build
+```
+
+中文字体需由本机合法提供，不提交系统字体。`--group complete` 不覆盖前五条视频。编辑预览也可在 [HyperFrames 桌面应用](https://hyperframes.dev/studio/download) 中继续。
+
+### 本批验收结果
+
+- 现有 5 项测试通过；生产构建通过，导出 27 个静态路由，Pagefind 收录 19 篇正式文章。
+- 全部 7 条视频的媒体、封面、字幕与导出校验通过。两条新增视频由 FFprobe 确认为 H.264、1920×1080、30 fps、15.000 秒、无音轨。
+- 逐张审阅本批 39 张截图并修正裁取边界；HyperFrames 检查及分步、接缝、手机审阅通过，仅保留符合要求的静音提示。
+- Chrome 实测画布章节锚点、图片放大、按钮关闭及 Esc 关闭；新增涂抹视频完整播放到 15 秒，原生播放器可选择简体中文，字幕轨道加载成功。
+- 390×844 窄屏检查：正文宽度与滚动宽度同为 390px，可见图片宽 346px，没有横向溢出或超过原图宽度；结束后恢复浏览器尺寸。
+- 下载自动化等待超时，改用 HTTP 下载检查：两条新增 MP4 和两份 VTT 均返回 200，文件字节与 assets 源文件完全一致；不将下载自动化记录为通过。

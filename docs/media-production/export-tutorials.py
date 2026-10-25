@@ -4,9 +4,9 @@ import argparse,json,subprocess
 base=Path(__file__).resolve().parent
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('master',nargs='?',type=Path)
-parser.add_argument('--group',choices=['base','workflow'],default='base')
+parser.add_argument('--group',choices=['base','workflow','complete'],default='base')
 args=parser.parse_args()
-groups={'base':('video/tutorials-master.mp4',['image-setup.mp4','reference-guide.mp4','video-setup.mp4','canvas-connect.mp4']), 'workflow':('workflow-video/workflow-master.mp4',['workflow-import.mp4'])}
+groups={'complete':('complete-video/complete-master.mp4',['paint-mark.mp4','shared-organize.mp4']),'base':('video/tutorials-master.mp4',['image-setup.mp4','reference-guide.mp4','video-setup.mp4','canvas-connect.mp4']), 'workflow':('workflow-video/workflow-master.mp4',['workflow-import.mp4'])}
 relative,names=groups[args.group]
 master=args.master or base/relative
 output=base.parent.parent/'assets/tutorials'

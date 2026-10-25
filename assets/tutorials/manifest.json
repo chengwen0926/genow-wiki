@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "capturedAt": "2026-10-23",
+  "capturedAt": "2026-10-25",
   "source": "genow-v2 real components in isolated documentation fixture",
   "videos": [
     {
@@ -44,6 +44,24 @@
       "title": "工作流模板：浏览、拖入与检查",
       "poster": "workflow-import-poster.jpg",
       "captions": "workflow-import.zh-CN.vtt",
+      "duration": 15,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "paint-mark.mp4",
+      "title": "涂抹标记：保存与连接",
+      "poster": "paint-mark-poster.jpg",
+      "captions": "paint-mark.zh-CN.vtt",
+      "duration": 15,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "shared-organize.mp4",
+      "title": "共享素材：移动与核对",
+      "poster": "shared-organize-poster.jpg",
+      "captions": "shared-organize.zh-CN.vtt",
       "duration": 15,
       "width": 1920,
       "height": 1080

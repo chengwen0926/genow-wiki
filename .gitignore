@@ -26,3 +26,10 @@ docs/media-production/video/tutorials-master.mp4
 /docs/media-production/workflow-video/workflow-master.mp4
 /docs/media-production/workflow-video/assets/fonts/*.ttc
 /docs/media-production/workflow-video/.thumbnails/
+
+# Complete handbook media production intermediates
+/docs/media-production/complete-video/.hyperframes/
+/docs/media-production/complete-video/renders/
+/docs/media-production/complete-video/complete-master.mp4
+/docs/media-production/complete-video/assets/fonts/*.ttc
+/docs/media-production/complete-video/.thumbnails/

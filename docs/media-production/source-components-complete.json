@@ -1,0 +1,97 @@
+{
+  "checkedAt": "2026-10-25",
+  "files": [
+    {
+      "file": "genow-v2/frontend/src/store/auth/useAuthStore.ts",
+      "sha256": "166e06a47194401e9704145874471e692f5e1ad695c89cfecd0a48fe5ed15b42"
+    },
+    {
+      "file": "genow-v2/frontend/src/components/layout/Navbar.tsx",
+      "sha256": "5ccb7510e23f86f22770a716d6bfb0a81450c6ab9fc931835ee6b8a279c03612"
+    },
+    {
+      "file": "genow-v2/frontend/src/components/layout/SettingsPanel.tsx",
+      "sha256": "1c942617256d0436f36d068c6c855a86f31379be9f48dfa366d42d58a05bc354"
+    },
+    {
+      "file": "genow-v2/frontend/src/components/canvas/list/CreateProjectModal.tsx",
+      "sha256": "b471db76b6ad76bd95beb8041fcf23cce91c52eec75cef62ea6ceee165ca9bb2"
+    },
+    {
+      "file": "genow-v2/frontend/src/components/canvas/editor/CanvasEditor.tsx",
+      "sha256": "5ea04371408483071432df0b059d8fc28e6d06d140d9cf89cf4b26d2d5bc8a1e"
+    },
+    {
+      "file": "genow-v2/frontend/src/components/canvas/templates/WorkflowTemplateEditor.tsx",
+      "sha256": "898bb0700ea9e9b96fd0085955ff5b1e8080217df4da8a807260c1887fb7b463"
+    },
+    {
+      "file": "genow-v2/frontend/src/components/notifications/NotificationWorkspace.tsx",
+      "sha256": "31753fbed2148ae6c0344a14f866c91963cd9af194231ba8e02c676aa043b770"
+    },
+    {
+      "file": "genow-v2/frontend/src/components/notifications/MaterialShareViewer.tsx",
+      "sha256": "af669a704d8f0fd3c0a9df793c77a6ce92525adcdb051ac78afea235679bf4b9"
+    },
+    {
+      "file": "genow-v2/frontend/src/app/(main)/admin/users/page.tsx",
+      "sha256": "01bb4df8c0b17a3c8a885d82d79d4816dbfaaa78c82e8249001df017b3b81ba1"
+    },
+    {
+      "file": "genow-v2/frontend/src/app/(main)/admin/dashboard/page.tsx",
+      "sha256": "d91b8aeb8c905fe47c38ed9de8f4439ceb4a2aa626f7dc9af907a81b999e0c54"
+    },
+    {
+      "file": "genow-v2/frontend/src/app/(main)/admin/models/page.tsx",
+      "sha256": "31b07f73d1133a9292d25c003f1ea0d6bb4a3dde1384b7daa437b8dc778590b4"
+    },
+    {
+      "file": "genow-v2/frontend/src/app/(main)/admin/video-usage/page.tsx",
+      "sha256": "49875eb0d8cc7721943ea449215ae2346fbea8851c5732a099f6f184b5c625a1"
+    },
+    {
+      "file": "genow-v2/frontend/src/app/(main)/admin/assets/page.tsx",
+      "sha256": "cf44f8e7131f757788d1217dfd9241122ac6316f7c0136d7080da5254c443e9b"
+    },
+    {
+      "file": "genow-v2/frontend/src/app/(main)/admin/content/page.tsx",
+      "sha256": "5ab38dafc2e18efa8dbbd8badfe2a8cc04f7785ffbef3bad134b9e52adae4555"
+    },
+    {
+      "file": "genow-v2/frontend/src/app/(main)/admin/prompt-templates/page.tsx",
+      "sha256": "d9dd253f1e81ad17187ca6c0db0690ec03c9f3ff623a5a672536e493bbdc6f41"
+    },
+    {
+      "file": "genow-v2/frontend/src/components/notifications/AnnouncementPanel.tsx",
+      "sha256": "e7fdfc10f9c37bf70ab3362d2c574df756e5d339d938969bfe84d6b947ad838b"
+    },
+    {
+      "file": "genow-v2/frontend/src/components/playground/Playground.tsx",
+      "sha256": "c5882e3357a0d1cb8290dd827792861a6f4f3cbfbf78965734329cd71e87f6da"
+    },
+    {
+      "file": "genow-v2/frontend/src/components/shared/generation/ViduSubjectPanel.tsx",
+      "sha256": "7d430d54100e3bb019c911f56495ec3a22869b169d7d1481343bc5f679aeb304"
+    },
+    {
+      "file": "genow-v2/frontend/src/components/shared/generation/KlingElementPanel.tsx",
+      "sha256": "e5a3bf9ab55d85fa8fe877791a81d13708d7041a06931d48679abf8c6d2dc049"
+    },
+    {
+      "file": "genow-v2/frontend/src/components/console/history/HistoryItem.tsx",
+      "sha256": "797117076aeb2aab9517d064bf480c9f6cc1aae9c84a2df44f5c62baccfe1aac"
+    },
+    {
+      "file": "docs/media-production/capture/complete-api.ts",
+      "sha256": "e2e05f065b4ae6f44110967d62c545089d27b5e599a5d78c34e34b8502491b14"
+    },
+    {
+      "file": "docs/media-production/capture/complete-data.ts",
+      "sha256": "81a0ab99ba1853ffb38dd5f302e78b9eca91e087ea1912707e5bdb22dc51cdb3"
+    },
+    {
+      "file": "docs/media-production/capture/complete-page.tsx",
+      "sha256": "d6837241bc9b24fb0065d49c7d7d427e0e6458184291c3bff04aa5f14a2da772"
+    }
+  ]
+}

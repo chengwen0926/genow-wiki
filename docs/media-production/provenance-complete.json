@@ -1,0 +1,598 @@
+{
+  "capturedAt": "2026-10-25",
+  "source": "genow-v2 real React components, isolated demo API, Chrome",
+  "businessCommit": "876fdbdaea91b8bb533fae5bbd2938adce3698c8",
+  "notes": [
+    "Mixed native viewport sizes; extracted without resizing.",
+    "Demo coffee image is illustrative, not an AI output.",
+    "Copy scene uses the verified empty-copy structure with separated positions.",
+    "No production API, credentials, invites, messages, publication or deletions were submitted."
+  ],
+  "records": [
+    {
+      "file": "navigation.jpg",
+      "sourcePixels": [
+        2560,
+        1318
+      ],
+      "crop": {
+        "left": 980,
+        "top": 5,
+        "width": 600,
+        "height": 85
+      },
+      "sourceSha256": "47988d3c3efc0a29e76c17a92e887efd08f0705c5bffe3f76a8bb11cccae6140",
+      "outputSha256": "0233095866aa26285544f30ff90d0cbd766325a1a76257b3fdd292828649904a"
+    },
+    {
+      "file": "personal-usage.jpg",
+      "sourcePixels": [
+        2560,
+        1318
+      ],
+      "crop": {
+        "left": 515,
+        "top": 235,
+        "width": 1530,
+        "height": 845
+      },
+      "sourceSha256": "a045cfb0085ee59de3176fedf3cf356a36a0bb561dce2d327bfd3422054faa58",
+      "outputSha256": "969aa4401a6ec6054dd52f1306b715c662b065ad75cb5d740ac6203930cecac7"
+    },
+    {
+      "file": "personal-keys.jpg",
+      "sourcePixels": [
+        2560,
+        1318
+      ],
+      "crop": {
+        "left": 515,
+        "top": 235,
+        "width": 1530,
+        "height": 465
+      },
+      "sourceSha256": "62c5adc7515e5f0a0f4d029c48cdcc96f0f740ab695d6b197dfdf70dd8d851c1",
+      "outputSha256": "9d4437c64ddc5567839e004d42fa9bc79010b0227f7af74baea4ab3471305c03"
+    },
+    {
+      "file": "project-create.jpg",
+      "sourcePixels": [
+        2560,
+        1318
+      ],
+      "crop": {
+        "left": 985,
+        "top": 370,
+        "width": 590,
+        "height": 580
+      },
+      "sourceSha256": "fa2f526a945348148059e2cc386fc6743963565b2bc2e2a65de3bea4a3298c8c",
+      "outputSha256": "48813cc826a9d2904b5d95c4fdeb31ceeae9fe078cd62d1f61ab1375025ce7f9"
+    },
+    {
+      "file": "admin-user-create.jpg",
+      "sourcePixels": [
+        2560,
+        1318
+      ],
+      "crop": {
+        "left": 985,
+        "top": 345,
+        "width": 590,
+        "height": 630
+      },
+      "sourceSha256": "b43f40c9f1bc5c5b110824446e71f794d472c8c9e66a2abf735eb191126313c0",
+      "outputSha256": "bbd4d3b6ca290fd91aceab88645438c990ef04fbddb608e39bbcd70bf7cadc1d"
+    },
+    {
+      "file": "admin-user-storage.jpg",
+      "sourcePixels": [
+        2560,
+        1318
+      ],
+      "crop": {
+        "left": 985,
+        "top": 310,
+        "width": 590,
+        "height": 700
+      },
+      "sourceSha256": "35099b6bf3ea97e51ce57ae3c55e4a30f0b88bd2585549ba8841cf5e003deb6e",
+      "outputSha256": "9eb694e4a737ae0e3bbb528a467387071f7e6e27f962d27eb264e054d7a1696b"
+    },
+    {
+      "file": "admin-models.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 365,
+        "top": 75,
+        "width": 1190,
+        "height": 350
+      },
+      "sourceSha256": "2529cfa37fa847a22b1aa222057c0606f3c90055fd3204a3080656dcf538d0a7",
+      "outputSha256": "b622a3ae59ac3de7465ea3c134987a27020d274e2a5fa23026dfd5ee0e3fc6b7"
+    },
+    {
+      "file": "admin-model-order.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 365,
+        "top": 75,
+        "width": 1190,
+        "height": 350
+      },
+      "sourceSha256": "eed22993937af55abea3c97cbba9d073ef2b081b2fe5e9aeaa85fbce5ea8faf6",
+      "outputSha256": "da037f7087c07c74b47a745830fc927a2d505f93a677ace97937353429dce2fe"
+    },
+    {
+      "file": "admin-video-usage.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 365,
+        "top": 75,
+        "width": 1190,
+        "height": 350
+      },
+      "sourceSha256": "dd6403444dbcce3167aabeba60a2c37d49e0e72663f38cf0da0b2075bfd31120",
+      "outputSha256": "938b200c800a7a66cd50218d53f9e0d634929ec294a91b47ce60fcb780c15fe6"
+    },
+    {
+      "file": "admin-storage.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 365,
+        "top": 75,
+        "width": 1190,
+        "height": 520
+      },
+      "sourceSha256": "de09c3ac5d695d9aa00d3412efc00cd01e83bf89188bcff3274da633b5a01a54",
+      "outputSha256": "82ee2c8e349eeefa49665d6ea1abf40b497f0864f2f6a364e3e5384625720f97"
+    },
+    {
+      "file": "admin-storage-runtime.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 1230,
+        "top": 0,
+        "width": 690,
+        "height": 720
+      },
+      "sourceSha256": "398927dcf7ddf9737bbe96f9a989876a5869aa46200c858f9670ebf40eb46796",
+      "outputSha256": "9c97cd5fda1294861b37e3e7115199077c28fc45b451fa75383dff3822c951d0"
+    },
+    {
+      "file": "admin-errors.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 365,
+        "top": 75,
+        "width": 1190,
+        "height": 480
+      },
+      "sourceSha256": "59d5b55485d072cb2d146966034ba003380ffb797bae2f6a4d47270e577fc282",
+      "outputSha256": "03eec0f2092026fe0145b813f63c22fcaea97139490a3f19d6d86fb309e6717c"
+    },
+    {
+      "file": "admin-dashboard.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 230,
+        "top": 75,
+        "width": 1460,
+        "height": 550
+      },
+      "sourceSha256": "1cba36faa1e2684f7556a947b3ac4e7ef6de16c821c88dbbfc3f4452cf51a736",
+      "outputSha256": "e0961ed82b13083fb59c65d16d4e5ff78b09f7b73877157b0674ed60c1dc686a"
+    },
+    {
+      "file": "admin-system-template.jpg",
+      "sourcePixels": [
+        2560,
+        1318
+      ],
+      "crop": {
+        "left": 680,
+        "top": 75,
+        "width": 1200,
+        "height": 850
+      },
+      "sourceSha256": "c414ae909fa288f6c078ffcbcacb75b1e582954776f3939f19e8bedd23dfe998",
+      "outputSha256": "51e0b069bad06c4337d35543dc6da32b785e98466b7fc33fc49cf1bb2b6b7434"
+    },
+    {
+      "file": "admin-announcement-edit.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 365,
+        "top": 75,
+        "width": 1190,
+        "height": 740
+      },
+      "sourceSha256": "b27e1d563203c2d244c5205a02f6f44523901cc4ba82d7f2ebd125460a1f4033",
+      "outputSha256": "bfb8aeb9b499b084571acd0dbeeff218093cda854154ebed6ab137b80fca4867"
+    },
+    {
+      "file": "admin-announcement-history.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 365,
+        "top": 75,
+        "width": 1190,
+        "height": 460
+      },
+      "sourceSha256": "359d16d9e078e1cb78e1b895d56d8948ec6628cfdd3ad032b9c8daf9ae79f4d8",
+      "outputSha256": "e24d9a0345f9fb619abdade70b2a2423d71f0609e1d58a8b02aaa31755935675"
+    },
+    {
+      "file": "admin-workflow-save.jpg",
+      "sourcePixels": [
+        2560,
+        1318
+      ],
+      "crop": {
+        "left": 0,
+        "top": 64,
+        "width": 2560,
+        "height": 1000
+      },
+      "sourceSha256": "adea60586eeebd7b6577fac8bf25c6e661e0d44509ce28a27e67a98bfdedfb79",
+      "outputSha256": "5577bccf64f0cde5e4d36222ddaae065abc97e4927532d5a53adfaf779cc9c87"
+    },
+    {
+      "file": "notifications-invite.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 580,
+        "top": 160,
+        "width": 760,
+        "height": 470
+      },
+      "sourceSha256": "b4c1477da54d8450cdc327e01719efe26db215d3d4cee8d1c2f1d00ab98a6094",
+      "outputSha256": "48c1d600b6e8c738c802406c88ac8bf658158e230bf435d021e43c10c8871caa"
+    },
+    {
+      "file": "notifications-sent.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 580,
+        "top": 160,
+        "width": 760,
+        "height": 470
+      },
+      "sourceSha256": "a2f861dda8da07480266991a1fd87fb8afa6cd051c80577a7af819e8a7d8254f",
+      "outputSha256": "b277318232a0c3f7b98e3cecbc6af7f8a5d38da2ce69a067b62e2db1cfc62589"
+    },
+    {
+      "file": "share-received.jpg",
+      "sourcePixels": [
+        2560,
+        1318
+      ],
+      "crop": {
+        "left": 580,
+        "top": 220,
+        "width": 1400,
+        "height": 880
+      },
+      "sourceSha256": "8f5beb516ecd51447232df2e3a115e8f7a7eba2364a1506784c22297b182e598",
+      "outputSha256": "6e8925ff3c449c730b8a3acfbf30a181fd14571306f58cab5af4f0569c510768"
+    },
+    {
+      "file": "playground-browse.jpg",
+      "sourcePixels": [
+        2560,
+        1318
+      ],
+      "crop": {
+        "left": 675,
+        "top": 75,
+        "width": 1210,
+        "height": 570
+      },
+      "sourceSha256": "f296050f40aef8f684288ec02c98eb2f5ccfa8c36f6440ca147057617b7fe087",
+      "outputSha256": "f8b677a3b40a8abdec429853e587b76a628c584181ab9feb0e7586439f662671"
+    },
+    {
+      "file": "playground-details.jpg",
+      "sourcePixels": [
+        2560,
+        1318
+      ],
+      "crop": {
+        "left": 600,
+        "top": 165,
+        "width": 1390,
+        "height": 910
+      },
+      "sourceSha256": "68681bd3ae32bec73a7fcd14deaee2e12b6e65854696a9c687b516aa452bf78c",
+      "outputSha256": "75c71c8ecd1c756c4a07077111a7840f65fbc9a3412e9e53e2f3b3f1a9abf8e9"
+    },
+    {
+      "file": "vidu-create.jpg",
+      "sourcePixels": [
+        1512,
+        827
+      ],
+      "crop": {
+        "left": 580,
+        "top": 425,
+        "width": 350,
+        "height": 345
+      },
+      "sourceSha256": "d636540d4a5be06a182c833e33b82441cdfc39e59fdbced6efd54da96df583ca",
+      "outputSha256": "2f60962da64b3481641fa15cf8251f6bd1be19f00396bbd1e37c5e8b5a04c494"
+    },
+    {
+      "file": "kling-create.jpg",
+      "sourcePixels": [
+        1512,
+        827
+      ],
+      "crop": {
+        "left": 580,
+        "top": 360,
+        "width": 350,
+        "height": 435
+      },
+      "sourceSha256": "44fe3c7240e89787abd4bff80f8b7df329bb27e201c685b31ac6c387cfc8e679",
+      "outputSha256": "22383a042f934d9ca8909ca62d710a96b59f37df7c61eb137cfad0da48b754ed"
+    },
+    {
+      "file": "paint-tools.jpg",
+      "sourcePixels": [
+        1512,
+        827
+      ],
+      "crop": {
+        "left": 0,
+        "top": 0,
+        "width": 1512,
+        "height": 827
+      },
+      "sourceSha256": "5959f0bb790a7c79ca43fce17584d009cf91840801fba1bc02ad40b2d711297e",
+      "outputSha256": "1a5fe08c9db7b5f7de2acc19140c80b5f2a1c5e068d21a15d6d43184614e3413"
+    },
+    {
+      "file": "paint-saved.jpg",
+      "sourcePixels": [
+        1512,
+        827
+      ],
+      "crop": {
+        "left": 195,
+        "top": 260,
+        "width": 750,
+        "height": 290
+      },
+      "sourceSha256": "936339db312b81e09254ef94126cb8ec6b3520a43d069121313aedb12b583a6a",
+      "outputSha256": "bc2e1dcecf9e80a5d7ae1ea19d028bb96a4c61b46debe0c6e1621fff7eb5bebc"
+    },
+    {
+      "file": "paint-connected.jpg",
+      "sourcePixels": [
+        1512,
+        771
+      ],
+      "crop": {
+        "left": 190,
+        "top": 170,
+        "width": 1190,
+        "height": 530
+      },
+      "sourceSha256": "142098a9bff4e38ef34b3e8e7f7d773ef7d2cfbefe1bc5517786a8d8ed8a4da9",
+      "outputSha256": "6b2014f6516afa15db3a96a67cc480d7bf8fa3562552d23f4f1168eb38ac9020"
+    },
+    {
+      "file": "canvas-copy-empty.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 215,
+        "top": 345,
+        "width": 1490,
+        "height": 440
+      },
+      "sourceSha256": "9c5866fad34541792c693a410260ad3058ae629b7edab2b226cf63e8167188c4",
+      "outputSha256": "f76744d6870c7e2521ac2892e86662ec496f812993371f6fa4bd8c974fcebaed"
+    },
+    {
+      "file": "canvas-delete-confirm.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 610,
+        "top": 340,
+        "width": 700,
+        "height": 630
+      },
+      "sourceSha256": "ad776a2c174360ef3e58362ac2050f082099e11f10f044281065f496d3422403",
+      "outputSha256": "d2a89f5ff0be9af6722d5b92d34659147af8aa83b31aa0ac58d1678f73730243"
+    },
+    {
+      "file": "video-frames.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 495,
+        "top": 770,
+        "width": 930,
+        "height": 285
+      },
+      "sourceSha256": "01a3611804d16969309e5c4450d554f2d7a314adeb5716e132c77faa154ae7a7",
+      "outputSha256": "7bee24cba5b3867fe6222fa442dfd878bcebcd7eb3c286964f70acd3dcb56c5f"
+    },
+    {
+      "file": "video-smart.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 495,
+        "top": 770,
+        "width": 930,
+        "height": 285
+      },
+      "sourceSha256": "af3d65c643502bef3eabda92296f0c8f4b0efaf353a9b46c47eecaae7f44cbb9",
+      "outputSha256": "c53efa410f5b927e9d8fe35b8c105b1641eb36750cd30be7ef94f57e584c3bf1"
+    },
+    {
+      "file": "missing-required.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 495,
+        "top": 770,
+        "width": 930,
+        "height": 285
+      },
+      "sourceSha256": "1d36660161b0a2b89ee1206e362e29796848fe82518083a31cb4a5ff74bb095a",
+      "outputSha256": "178c15313e49b3de4e1b9b3c30ce038c5dd951d19bf30ff4b260cfa8377b4c63"
+    },
+    {
+      "file": "personal-material-actions.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 70,
+        "top": 130,
+        "width": 470,
+        "height": 470
+      },
+      "sourceSha256": "06a22a7d25052002bd7addc8aa1a53dff35974a3a0a3ff47cf44f7f918ece4a9",
+      "outputSha256": "8a3ed6056cc3f0afaa9c432282d5dfa4cffd6dd9678d8aa962ba1d014ce29952"
+    },
+    {
+      "file": "asset-delete-confirm.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 145,
+        "top": 75,
+        "width": 1080,
+        "height": 340
+      },
+      "sourceSha256": "b007e02033face8fe480f9f793ded66327357a0e0e10544e077659a74f3b341b",
+      "outputSha256": "d5f201308408c5f2b9efe6d135177c8a3f5815acce84506470e81e199ad99fcb"
+    },
+    {
+      "file": "asset-filter-empty.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 690,
+        "top": 75,
+        "width": 540,
+        "height": 560
+      },
+      "sourceSha256": "7c90a4fca565f9ba1ccd27d7f8352b107a0dd1bed6ef59b46959a9826fc0ce13",
+      "outputSha256": "160e65de023a0caae852964ecb5496c7a0ac28925a004863705a0b120dfc9a3b"
+    },
+    {
+      "file": "generation-failure.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 590,
+        "top": 130,
+        "width": 740,
+        "height": 270
+      },
+      "sourceSha256": "512107ddd525e43587efc22ce97b698a098d8f90326a3d388cf79f57409b276c",
+      "outputSha256": "2e986e7017aef0cffcdf1705e811cb71263ef67869d998185b7e090d50d65f46"
+    },
+    {
+      "file": "team-move-before.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 70,
+        "top": 130,
+        "width": 470,
+        "height": 470
+      },
+      "sourceSha256": "220b3b4671a66d7a749a2ff06c7bfed9d5d5aab78188bc1fb3c7fa90f70c1f9a",
+      "outputSha256": "41c12bc2489ed5635e67d710874614ba78373c3cbcd2a615239ba82e74705074"
+    },
+    {
+      "file": "team-move-dropped.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 70,
+        "top": 130,
+        "width": 470,
+        "height": 470
+      },
+      "sourceSha256": "71adabd399373e20bcb93cfd859f631df82d63931481b4e4ed6203d8a2f59780",
+      "outputSha256": "5d5cce19c40afad809d05ea628bbaad486935f32c805c6ff8f948b8e515e0934"
+    },
+    {
+      "file": "team-move-after.jpg",
+      "sourcePixels": [
+        1920,
+        1102
+      ],
+      "crop": {
+        "left": 70,
+        "top": 130,
+        "width": 470,
+        "height": 470
+      },
+      "sourceSha256": "bcf2c943aa128e9a21b04b26fab724804e6a4c5f27c0a9012c99452d84ff11db",
+      "outputSha256": "e1f267b7b136d81d087190e58c2d1c35d31338784bd1d6fba029bf9df4a3612e"
+    }
+  ]
+}

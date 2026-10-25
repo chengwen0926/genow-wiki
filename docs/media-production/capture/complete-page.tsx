@@ -1,0 +1,26 @@
+"use client";
+import {useEffect,useState} from 'react';
+import {useAuthStore} from '@/store/auth/useAuthStore';
+import {user,template,errors} from '../complete-data';
+import Navbar from '@/components/layout/Navbar';
+import {SettingsPanel} from '@/components/layout/SettingsPanel';
+import {CreateProjectModal} from '@/components/canvas/list/CreateProjectModal';
+import {CanvasEditor} from '@/components/canvas/editor/CanvasEditor';
+import {WorkflowTemplateEditor} from '@/components/canvas/templates/WorkflowTemplateEditor';
+import {NotificationWorkspace} from '@/components/notifications/NotificationWorkspace';
+import {MaterialShareViewer} from '@/components/notifications/MaterialShareViewer';
+import Users from '@/app/(main)/admin/users/page';
+import Dashboard from '@/app/(main)/admin/dashboard/page';
+import Models from '@/app/(main)/admin/models/page';
+import VideoUsage from '@/app/(main)/admin/video-usage/page';
+import Storage from '@/app/(main)/admin/assets/page';
+import Content from '@/app/(main)/admin/content/page';
+import Templates from '@/app/(main)/admin/prompt-templates/page';
+import {AnnouncementPanel} from '@/components/notifications/AnnouncementPanel';
+import {Playground} from '@/components/playground/Playground';
+import {ViduSubjectPanel} from '@/components/shared/generation/ViduSubjectPanel';
+import {KlingElementPanel} from '@/components/shared/generation/KlingElementPanel';
+import {HistoryItem} from '@/components/console/history/HistoryItem';
+export default function Page(){const[scene,setScene]=useState('');useEffect(()=>{useAuthStore.getState().setUser({...user,role:'admin'});setScene(new URLSearchParams(location.search).get('scene')||'nav')},[]);
+const pages:Record<string,React.ReactNode>={nav:<Navbar/>,settings:<SettingsPanel open onClose={()=>{}} onLogout={()=>{}}/>,project:<CreateProjectModal projectType="team" onClose={()=>{}} onCreated={()=>{}}/>,copy:<CanvasEditor projectId="docs-copy" onBack={()=>{}}/>,paint:<CanvasEditor projectId="docs-paint" onBack={()=>{}}/>,template:<WorkflowTemplateEditor initial={template as never} onBack={()=>{}}/>,notifications:<NotificationWorkspace onClose={()=>{}}/>,shareview:<MaterialShareViewer id="docs-share" onClose={()=>{}}/>,users:<Users/>,dashboard:<Dashboard/>,models:<Models/>,usage:<VideoUsage/>,storage:<Storage/>,errors:<Content/>,templates:<Templates/>,announcement:<AnnouncementPanel/>,playground:<Playground/>,vidu:<ViduSubjectPanel selectedIds={[]} onConfirm={()=>{}} onClose={()=>{}}/>,kling:<KlingElementPanel elements={[]} loading={false} onCreate={async()=>{throw new Error('演示不创建远端资源')}} onDelete={()=>{}} selectedIds={[]} onConfirm={()=>{}} onClose={()=>{}}/>,failure:<div style={{width:700,margin:'90px auto'}}><HistoryItem task={{id:'docs-error',mode:'video',model:'seedance_v2_0',prompt:errors[0].prompt,aspectRatio:'16:9',count:1,createdAt:new Date(errors[0].created_at),children:[{id:'docs-error',status:'failed',error:errors[0].error_message,result:[]}]}} onUsePrompt={()=>{}} onReEdit={()=>{}} onReGenerate={()=>{}} onDelete={()=>{}} /></div>};
+return <><header className="capture-header"><span className="capture-brand">Genow</span><span className="capture-note">文档演示 · 虚构账号、统计与素材 · 不操作真实业务数据</span></header><div style={{height:'calc(100vh - 64px)',position:'relative',maxWidth:scene==='dashboard'?1480:['users','dashboard','models','usage','storage','errors','templates','announcement','playground'].includes(scene)?1200:undefined,margin:'0 auto',padding:['users','dashboard','models','usage','storage','errors','templates','announcement','playground'].includes(scene)?24:0}}>{scene&&(['vidu','kling'].includes(scene)?<div style={{position:'absolute',left:'calc(50% - 160px)',top:'min(700px, calc(100vh - 120px))',width:320,height:40}}>{pages[scene]}</div>:pages[scene])}</div></>}
