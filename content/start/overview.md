@@ -8,6 +8,8 @@ sourceChapter: 1
 ---
 # 认识 Genow
 
+使用过旧版 Genow？先阅读[Genow v2 版本更新指南](/wiki/updates/genow-v2/)，了解新增能力、入口变化和升级后的检查事项。
+
 ## 从哪个入口开始
 
 | 入口 | 主要用途 | 适合的任务 |

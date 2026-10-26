@@ -15,7 +15,7 @@ test("headings share unique IDs, skip code fences and flatten formatting", () =>
 
 test("all existing articles and media resolve in the expected order", async () => {
   const { pages } = await readWiki();
-  assert.equal(pages.filter((p) => !p.hidden).length, 19);
+  assert.equal(pages.filter((p) => !p.hidden).length, 20);
   assert.equal(pages[0].slug, "start/overview");
   assert.ok(pages.find((p) => p.slug === "create/images").headings.length > 7);
   assert.ok(pages.filter((p) => p.hidden).every((p) => p.markdown.includes("查看最新使用说明")));
