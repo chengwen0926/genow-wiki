@@ -18,3 +18,7 @@
 
 
 用户手册于 2026-10-22 从 genow-v2 根目录迁入 content/。以上实现路径均相对于 genow-v2 仓库。后续用户说明统一维护在本仓库 content/，原始单文件手册作为迁移时的归档依据。
+
+## 供应商 API 文档索引
+
+`content/reference/provider-api-docs.md` 于2026-10-29按用户提供的7个URL创建。Volcengine及MiniMax页面可读取，确认标题与概览用途；Kling及4份飞书文档的自动读取未成功，因此只按用户提供的用途收录，不声称已核验正文、参数、价格或访问权限。保留用户原始 `got-image 2.0` 标注，并在页面说明模型名称以原文为准。后续维护按供应商分组，不自行将“from Gemini / from OpenAI”解释为已验证的协议或模型归属。
